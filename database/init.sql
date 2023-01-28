@@ -2,10 +2,59 @@ BEGIN;
 
 DROP TABLE IF EXISTS employee, role, application, site, country, project, iteration, milestone, scrum CASCADE;
 
+CREATE TABLE role (
+   id SERIAL PRIMARY KEY,
+   role_name TEXT
+   );
+
+CREATE TABLE country (
+   id SERIAL PRIMARY KEY,
+   country_name TEXT
+);
+
+CREATE TABLE site (
+   id SERIAL PRIMARY KEY,
+   site_name TEXT,
+   country_id INTEGER REFERENCES country(id)
+);
+
+
+CREATE TABLE project (
+   id SERIAL PRIMARY KEY,
+   project_name TEXT,
+   pi_start_date DATE,
+   pi_end_date DATE
+);
+
+CREATE TABLE iteration (
+   id SERIAL PRIMARY KEY,
+   iteration_name TEXT,
+   project_id INTEGER REFERENCES project(id),
+   index VARCHAR(255)NOT NULL,
+   iteration_start_date DATE,
+   iteration_end_date DATE
+);
+-- "date" this format YYYY-MM-DD 
+
+CREATE TABLE milestone (
+   id SERIAL PRIMARY KEY,
+   milestone_name TEXT,
+   project_id INTEGER REFERENCES project(id),
+   milestone_date DATE,
+   description TEXT
+);
+
+CREATE TABLE scrum (
+  id SERIAL PRIMARY KEY,
+  scrum_name TEXT,
+  scrum_master_id VARCHAR(15),
+  project_id INTEGER REFERENCES project(id)
+);
+
 CREATE TABLE employee (
   id SERIAL PRIMARY KEY,
   idNumber VARCHAR(15),
-  name TEXT,
+  employee_name TEXT,
   email TEXT,
   phone VARCHAR(15) NOT NULL,
   productivity VARCHAR (10) NOT NULL,
@@ -15,77 +64,29 @@ CREATE TABLE employee (
   scrum_id INTEGER REFERENCES scrum(id)
 );
 
-CREATE TABLE role (
-   id SERIAL PRIMARY KEY,
-   name TEXT
-);
-
-CREATE TABLE site (
-   id SERIAL PRIMARY KEY,
-   name TEXT,
-   country_id INTEGER REFERENCES country(id)
-);
-
-CREATE TABLE country (
-   id SERIAL PRIMARY KEY,
-   name TEXT
-);
-
-CREATE TABLE project (
-   id SERIAL PRIMARY KEY,
-   name TEXT,
-   start_date DATE,
-   end_date DATE
-);
-
-CREATE TABLE iteration (
-   id SERIAL PRIMARY KEY,
-   name TEXT,
-   project_id INTEGER REFERENCES project(id),
-   index VARCHAR(255)NOT NULL,
-   start_date DATE,
-   end_date DATE
-);
--- "date" this format YYYY-MM-DD 
-
-CREATE TABLE milestone (
-   id SERIAL PRIMARY KEY,
-   name TEXT,
-   project_id INTEGER REFERENCES project(id),
-   date DATE,
-   description TEXT
-);
-
-CREATE TABLE scrum (
-  id SERIAL PRIMARY KEY,
-  name TEXT,
-  scrum_master_id VARCHAR(15),
-  project_id INTEGER REFERENCES project(id)
-);
-
 --country inserts 
-INSERT INTO country (name) VALUES ('israel'),('india');
+INSERT INTO country (country_name) VALUES ('israel'),('india');
 
 --site
-INSERT INTO site (name, country_id) VALUES ('Nazareth',1),('Rannana',1),('Pune',2);
+INSERT INTO site (site_name, country_id) VALUES ('Nazareth',1),('Rannana',1),('Pune',2);
 
 --role
-INSERT INTO role (name) VALUES ('scrum_master'),('resource_manager'),('project_manager'),('developer'),('tester');
+INSERT INTO role (role_name) VALUES ('scrum_master'),('resource_manager'),('project_manager'),('developer'),('tester');
 
 --project
-INSERT INTO project (name, start_date, end_date) VALUES ('OSM','2021-08-17','2021-10-04'),('OSO','2022-06-15','2022-9-20'),('ARM','2021-05-21','2021-7-31'),('T1','2022-01-10','2022-05-09'),('PLTD','2022-04-25','2022-08-03');
+INSERT INTO project (project_name, pi_start_date, pi_end_date) VALUES ('OSM','2021-08-17','2021-10-04'),('OSO','2022-06-15','2022-9-20'),('ARM','2021-05-21','2021-7-31'),('T1','2022-01-10','2022-05-09'),('PLTD','2022-04-25','2022-08-03');
 
 --iteration
-INSERT INTO iteration (name, project_id, index, start_date, end_date) VALUES ('iteration-27',1,'1','2021-08-17','2021-09-06'),('iteration-27',1,'2','2021-09-07','2021-09-13'),('iteration-28',1,'1','2021-09-14','2021-10-04');
+INSERT INTO iteration (iteration_name, project_id, index, iteration_start_date, iteration_end_date) VALUES ('iteration-27',1,'1','2021-08-17','2021-09-06'),('iteration-27',1,'2','2021-09-07','2021-09-13'),('iteration-28',1,'1','2021-09-14','2021-10-04');
 
 --milestone
-INSERT INTO milestone (name, project_id, date, description) VALUES ('pi3-deployment',1,'2021-08-17','the deployment of the third pi'),('pi3-cut-off',1,'2021-10-04','the cut-off of the third pi');
+INSERT INTO milestone (milestone_name, project_id, milestone_date, description) VALUES ('pi3-deployment',1,'2021-08-17','the deployment of the third pi'),('pi3-cut-off',1,'2021-10-04','the cut-off of the third pi');
 
 --scrum
-INSERT INTO scrum (name, scrum_master_id, project_id) VALUES ('Agno', '69807',1),('Panay', '102954',3);
+INSERT INTO scrum (scrum_name, scrum_master_id, project_id) VALUES ('Agno', '69807',1),('Panay', '102954',3);
 
 --employees
-INSERT INTO employee (idNumber, name, email, phone, productivity, site_id, role_id, project_id, scrum_id) VALUES 
+INSERT INTO employee (idNumber, employee_name, email, phone, productivity, site_id, role_id, project_id, scrum_id) VALUES 
 ('69807','emp', '1@gmail.com','0501234567', '50', 3,1,1,1 ), 
 ('95384','emp', '2@gmail.com','0501234567', '0', 3,4,1,1),
 ('159556','emp', '3@gmail.com','0501234567', '90', 3,4,1,1),
