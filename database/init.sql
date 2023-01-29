@@ -53,7 +53,7 @@ CREATE TABLE scrum (
 
 CREATE TABLE employee (
   id SERIAL PRIMARY KEY,
-  idNumber VARCHAR(15),
+  id_number VARCHAR(15),
   employee_name TEXT,
   email TEXT,
   phone VARCHAR(15) NOT NULL,

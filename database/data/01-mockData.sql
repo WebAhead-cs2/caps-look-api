@@ -1,5 +1,5 @@
 
-BEGIN
+BEGIN;
 
 --country inserts 
 INSERT INTO country (country_name) VALUES ('israel'),('india');
@@ -23,7 +23,7 @@ INSERT INTO milestone (milestone_name, project_id, milestone_date, description) 
 INSERT INTO scrum (scrum_name, scrum_master_id, project_id) VALUES ('Agno', '69807',1),('Panay', '102954',3);
 
 --employees
-INSERT INTO employee (idNumber, employee_name, email, phone, productivity, site_id, role_id, project_id, scrum_id) VALUES 
+INSERT INTO employee (id_number, employee_name, email, phone, productivity, site_id, role_id, project_id, scrum_id) VALUES 
 ('69807','emp', '1@gmail.com','0501234567', '50', 3,1,1,1 ), 
 ('95384','emp', '2@gmail.com','0501234567', '0', 3,4,1,1),
 ('159556','emp', '3@gmail.com','0501234567', '90', 3,4,1,1),
