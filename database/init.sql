@@ -2,7 +2,7 @@ BEGIN;
 
 DROP TABLE IF EXISTS job, application, site, project, iteration, milestone, scrum, employee, 
 employee_scrum, absence, employee_absence, users CASCADE;
-DROP TYPE role_access_tier CASCADE;
+DROP TYPE IF EXISTS role_access_tier CASCADE;
 
 CREATE TABLE job (
    id SERIAL PRIMARY KEY,
