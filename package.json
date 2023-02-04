@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
-    "build:db": "node database/build.js"
+    "build:db": "node database/builds/initSQLBuild.js",
+    "seed:db": "node database/builds/mockDataBuild.js"
   },
   "repository": {
     "type": "git",

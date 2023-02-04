@@ -7,4 +7,5 @@
 - `npm i`
 - for .env file please refer to the .env.example file to know which variables you need
 - after you get the local database url run the following command to build it `npm run build:db`
+- run `npm run seed:db` to populate the database with fake data
 - `npm run dev`
