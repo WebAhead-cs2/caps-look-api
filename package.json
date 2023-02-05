@@ -9,7 +9,8 @@
     "build:db": "node database/builds/initSQLBuild.js",
     "seed:db": "node database/builds/mockDataBuild.js",
     "test": "echo test",
-    "prettier": "prettier --check ."
+    "prettier": "prettier --check .",
+    "prettier:fix": "prettier --write ."
   },
   "repository": {
     "type": "git",

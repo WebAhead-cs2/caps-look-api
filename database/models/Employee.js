@@ -1,4 +1,4 @@
-const db = require("./database/connections");
+const db = require('./database/connections')
 
 export const createEmployee = async (
   employee_name,
@@ -30,10 +30,10 @@ export const createEmployee = async (
       site_id,
       job_id,
       access_tier,
-      project_id,
+      project_id
     ]
-  );
-};
+  )
+}
 export const editEmployee = async (
   id,
   employee_name,
@@ -58,14 +58,14 @@ export const editEmployee = async (
       site_id,
       job_id,
       access_tier,
-      project_id,
+      project_id
     ]
-  );
-};
+  )
+}
 export const deleteEmployee = async (id) => {
-  return await db.query(`DELETE FROM employee WHERE id = ($1)`, [id]);
-};
+  return await db.query(`DELETE FROM employee WHERE id = ($1)`, [id])
+}
 export const getEmployees = async () => {
-  const employeeTable = await db.query(`SELECT * FROM employee`);
-  return employeeTable.rows;
-};
+  const employeeTable = await db.query(`SELECT * FROM employee`)
+  return employeeTable.rows
+}
