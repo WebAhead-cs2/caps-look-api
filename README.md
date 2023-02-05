@@ -9,3 +9,6 @@
 - after you get the local database url run the following command to build it `npm run build:db`
 - run `npm run seed:db` to populate the database with fake data
 - `npm run dev`
+
+API's Definition : visit this link >>>
+https://documenter.getpostman.com/view/25516578/2s935hQSCX#8c4b2b19-f5b9-48f0-ad17-5b1ef2aed851
