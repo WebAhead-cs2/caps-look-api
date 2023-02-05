@@ -2,17 +2,17 @@ const db = require("../database/connection");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 module.exports = async (req, res) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
   try {
-    const results = await db.query("SELECT * FROM users WHERE username = $1", [
-      username,
+    const results = await db.query("SELECT * FROM employee WHERE email = $1", [
+      email,
     ]);
     console.log(results.rows);
     //
     if (results.rows.length === 0) {
       return res.status(403).send({
         success: false,
-        message: "username does not exist",
+        message: " In correst email or password",
       });
     }
     //
@@ -23,7 +23,7 @@ module.exports = async (req, res) => {
     if (!isCorrectpass) {
       return res.status(403).send({
         success: false,
-        message: "Incorrect password or username",
+        message: "Incorrect password or email",
       });
     }
 

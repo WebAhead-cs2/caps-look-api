@@ -1,6 +1,5 @@
 const jwt = require("jsonwebtoken");
 const db = require("../database/connection");
-
 require("dotenv").config();
 module.exports = (req, res, next) => {
   const userToken = req.cookies.userToken;
