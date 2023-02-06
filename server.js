@@ -7,30 +7,26 @@ const { errorConverter, errorHandler } = require('./middleware/error')
 
 const app = express()
 const expressWinston = require('express-winston')
-const { transports, format} = require('winston')
+const { transports, format } = require('winston')
 const logger = require('./logger')
 
+app.use(
+  expressWinston.logger({
+    winstonInstance: logger,
+    statusLevels: true
+  })
+)
 
-app.use(expressWinston.logger({
-  winstonInstance: logger,
-  statusLevels: true
-}))
-
-
-const errmessage = format.printf(({level, meta, timestamp})=>{
+const errmessage = format.printf(({ level, meta, timestamp }) => {
   return ` ${timestamp} ${level}: ${meta.message}`
 })
 
- app.use(expressWinston.errorLogger({
-  transports :[
-    new transports.Console({ level: "error" })
-  ],
-  format: format.combine(
-    format.json(),
-    format.timestamp(),
-    errmessage
-  )
- }))
+app.use(
+  expressWinston.errorLogger({
+    transports: [new transports.Console({ level: 'error' })],
+    format: format.combine(format.json(), format.timestamp(), errmessage)
+  })
+)
 
 // cors is a middleware that allows us to specify which domains are allowed to access our API
 app.use(
@@ -49,7 +45,6 @@ app.use(errorHandler)
 app.listen(process.env.PORT || 4000, function () {
   console.log('Listening on port http://localhost:4000 !')
 })
-
 
 app.get('/500', (req, res) => {
   res.sendStatus(500)
