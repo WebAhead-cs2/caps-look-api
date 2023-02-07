@@ -1,5 +1,4 @@
 const db = require('../connection')
-const db = require('../connection')
 
 const createProject = async (
   project_name,
@@ -25,6 +24,13 @@ const editProject = async (
 
 const getProjects = async () => {
   const projectTable = await db.query(`SELECT * FROM project`)
-  return projectTable.rows
+
+  return Promise.resolve(projectTable.rows) 
+
 }
-module.exports = { createProject, editProject, getProjects }
+
+const getProjectsDetails=async()=>{
+  const data = await db.query("SELECT project.project_name,(SELECT COUNT(*) FROM iteration where project_id=project.id) as iteration_number, (SELECT COUNT(*) FROM scrum where project_id=project.id) as scrum_number,(SELECT COUNT(*) FROM employee WHERE employee.project_id = project.id) as employee_number FROM project");
+  return data.rows
+}
+module.exports = { createProject, editProject, getProjects,getProjectsDetails }
