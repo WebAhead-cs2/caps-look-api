@@ -1,4 +1,4 @@
-const db = require("./database/connections");
+const db = require('./database/connections')
 
 export const createIteration = async (
   iteration_name,
@@ -16,10 +16,10 @@ export const createIteration = async (
       project_id,
       iteration_number,
       iteration_start_date,
-      iteration_end_date,
+      iteration_end_date
     ]
-  );
-};
+  )
+}
 export const editIteration = async (
   id,
   iteration_name,
@@ -38,14 +38,14 @@ export const editIteration = async (
       project_id,
       iteration_number,
       iteration_start_date,
-      iteration_end_date,
+      iteration_end_date
     ]
-  );
-};
+  )
+}
 export const deleteIteration = async (id) => {
-  return await db.query(`DELETE FROM iteration WHERE id = ($1)`, [id]);
-};
+  return await db.query(`DELETE FROM iteration WHERE id = ($1)`, [id])
+}
 export const getIterations = async () => {
-  const iterationTable = await db.query(`SELECT * FROM iteration`);
-  return iterationTable.rows;
-};
+  const iterationTable = await db.query(`SELECT * FROM iteration`)
+  return iterationTable.rows
+}
