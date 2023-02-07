@@ -1,7 +1,4 @@
-
-const db = require("../connection");
-
-
+const db = require('../connection')
 
 module.exports.createProject = async (
   project_name,
@@ -11,10 +8,9 @@ module.exports.createProject = async (
   return await db.query(
     `INSERT INTO project (project_name,start_date,project_iterations_count) VALUES ($1,$2,$3) RETURNING *`,
     [project_name, start_date, project_iterations_count]
-  );
-};
+  )
+}
 module.exports.editProject = async (
-
   id,
   project_name,
   start_date,
@@ -27,7 +23,6 @@ module.exports.editProject = async (
 }
 
 module.exports.getProjects = async () => {
-  const projectTable = await db.query(`SELECT * FROM project`);
-  return projectTable.rows;
-};
-
+  const projectTable = await db.query(`SELECT * FROM project`)
+  return projectTable.rows
+}

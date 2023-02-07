@@ -43,6 +43,5 @@ app.use(errorConverter)
 app.use(errorHandler)
 
 app.listen(process.env.PORT || 4000, function () {
-
   console.log('Listening on port http://localhost:4000 !')
 })
