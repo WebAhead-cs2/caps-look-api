@@ -1,6 +1,6 @@
-const db = require('./database/connections')
+const db = require('../connection')
 
-export const createEmployee = async (
+const createEmployee = async (
   employee_name,
   id_number,
   mail,
@@ -34,7 +34,7 @@ export const createEmployee = async (
     ]
   )
 }
-export const editEmployee = async (
+const editEmployee = async (
   id,
   employee_name,
   id_number,
@@ -62,10 +62,11 @@ export const editEmployee = async (
     ]
   )
 }
-export const deleteEmployee = async (id) => {
+const deleteEmployee = async (id) => {
   return await db.query(`DELETE FROM employee WHERE id = ($1)`, [id])
 }
-export const getEmployees = async () => {
+const getEmployees = async () => {
   const employeeTable = await db.query(`SELECT * FROM employee`)
   return employeeTable.rows
 }
+module.exports = { createEmployee, editEmployee, deleteEmployee, getEmployees }

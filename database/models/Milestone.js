@@ -1,6 +1,6 @@
-const db = require('./database/connections')
+const db = require('../connection')
 
-export const createMilestone = async (
+const createMilestone = async (
   milestone_name,
   milestone_date,
   project_id,
@@ -11,7 +11,7 @@ export const createMilestone = async (
     [milestone_name, milestone_date, project_id, description]
   )
 }
-export const editMilestone = async (
+const editMilestone = async (
   id,
   milestone_name,
   milestone_date,
@@ -23,10 +23,16 @@ export const editMilestone = async (
     [id, milestone_name, milestone_date, project_id, description]
   )
 }
-export const deleteMilestone = async (id) => {
+const deleteMilestone = async (id) => {
   return await db.query(`DELETE FROM milestone WHERE id = ($1)`, [id])
 }
-export const getMilestones = async () => {
+const getMilestones = async () => {
   const milestoneTable = await db.query(`SELECT * FROM milestone`)
   return milestoneTable.rows
+}
+module.exports = {
+  createMilestone,
+  editMilestone,
+  deleteMilestone,
+  getMilestones
 }

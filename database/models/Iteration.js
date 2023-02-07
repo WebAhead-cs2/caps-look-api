@@ -1,6 +1,6 @@
-const db = require('./database/connections')
+const db = require('../connection')
 
-export const createIteration = async (
+const createIteration = async (
   iteration_name,
   project_id,
   iteration_number,
@@ -20,7 +20,7 @@ export const createIteration = async (
     ]
   )
 }
-export const editIteration = async (
+const editIteration = async (
   id,
   iteration_name,
   project_id,
@@ -42,10 +42,16 @@ export const editIteration = async (
     ]
   )
 }
-export const deleteIteration = async (id) => {
+const deleteIteration = async (id) => {
   return await db.query(`DELETE FROM iteration WHERE id = ($1)`, [id])
 }
-export const getIterations = async () => {
+const getIterations = async () => {
   const iterationTable = await db.query(`SELECT * FROM iteration`)
   return iterationTable.rows
+}
+module.exports = {
+  createIteration,
+  editIteration,
+  deleteIteration,
+  getIterations
 }

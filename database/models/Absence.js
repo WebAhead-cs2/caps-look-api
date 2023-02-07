@@ -1,5 +1,5 @@
-const db = require('./database/connections')
-export const createAbsence = async (
+const db = require('../connection')
+const createAbsence = async (
   absence_name,
   site_id,
   optional,
@@ -14,7 +14,7 @@ export const createAbsence = async (
     [absence_name, site_id, optional, absence_start_date, absence_end_date]
   )
 }
-export const editAbsence = async (
+const editAbsence = async (
   id,
   absence_name,
   site_id,
@@ -30,10 +30,11 @@ export const editAbsence = async (
     [id, absence_name, site_id, optional, absence_start_date, absence_end_date]
   )
 }
-export const deleteAbsence = async (id) => {
+const deleteAbsence = async (id) => {
   return await db.query(`DELETE FROM absence WHERE id = ($1)`, [id])
 }
-export const getAbsences = async () => {
+const getAbsences = async () => {
   const absenceTable = await db.query(`SELECT * FROM absence`)
   return absenceTable.rows
 }
+module.exports = { createAbsence, editAbsence, deleteAbsence, getAbsences }
