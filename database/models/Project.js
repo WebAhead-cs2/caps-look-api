@@ -1,6 +1,6 @@
 const db = require('../connection')
 
- const createProject = async (
+const createProject = async (
   project_name,
   start_date,
   project_iterations_count
@@ -10,7 +10,7 @@ const db = require('../connection')
     [project_name, start_date, project_iterations_count]
   )
 }
- const editProject = async (
+const editProject = async (
   id,
   project_name,
   start_date,
@@ -22,8 +22,8 @@ const db = require('../connection')
   )
 }
 
- const getProjects = async () => {
+const getProjects = async () => {
   const projectTable = await db.query(`SELECT * FROM project`)
   return projectTable.rows
 }
-module.exports={createProject,editProject,getProjects}
+module.exports = { createProject, editProject, getProjects }

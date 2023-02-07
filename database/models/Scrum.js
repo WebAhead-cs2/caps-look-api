@@ -1,6 +1,6 @@
 const db = require('../connection')
 
- const createScrum = async (
+const createScrum = async (
   scrum_name,
   scrum_master_id,
   application_id,
@@ -11,7 +11,7 @@ const db = require('../connection')
     [scrum_name, scrum_master_id, application_id, project_id]
   )
 }
- const editScrum = async (
+const editScrum = async (
   id,
   scrum_name,
   scrum_master_id,
@@ -23,11 +23,11 @@ const db = require('../connection')
     [id, scrum_name, scrum_master_id, application_id, project_id]
   )
 }
- const deleteScrum = async (id) => {
+const deleteScrum = async (id) => {
   return await db.query(`DELETE FROM scrum WHERE id = ($1)`, [id])
 }
- const getScrums = async () => {
+const getScrums = async () => {
   const scrumTable = await db.query(`SELECT * FROM scrum`)
   return scrumTable.rows
 }
-module.exports={createScrum,editScrum,deleteScrum,getScrums}
+module.exports = { createScrum, editScrum, deleteScrum, getScrums }

@@ -1,6 +1,6 @@
 const db = require('../connection')
 
- const createCapacity = async (
+const createCapacity = async (
   productivity,
   availability,
   employee_id,
@@ -14,7 +14,7 @@ const db = require('../connection')
     [productivity, availability, employee_id, total_capacity]
   )
 }
- const editCapacity = async (
+const editCapacity = async (
   id,
   productivity,
   availability,
@@ -29,11 +29,11 @@ const db = require('../connection')
     [id, productivity, availability, employee_id, total_capacity]
   )
 }
- const deleteCapacity = async (id) => {
+const deleteCapacity = async (id) => {
   return await db.query(`DELETE FROM capacity WHERE id = ($1)`, [id])
 }
- const getCapacitys = async () => {
+const getCapacitys = async () => {
   const capacityTable = await db.query(`SELECT * FROM capacity`)
   return capacityTable.rows
 }
-module.exports={createCapacity,editCapacity,deleteCapacity,getCapacitys}
+module.exports = { createCapacity, editCapacity, deleteCapacity, getCapacitys }
