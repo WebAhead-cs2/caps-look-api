@@ -12,9 +12,9 @@
     "prettier": "prettier --check .",
     "prettier:fix": "prettier --write .",
     "migrate": "node-pg-migrate",
-    "migrate:create":"npm run migrate create",
-    "migrate:up":"npm run migrate up",
-    "migrate:down":"npm run migrate down"
+    "migrate:create": "npm run migrate create",
+    "migrate:up": "npm run migrate up",
+    "migrate:down": "npm run migrate down"
   },
   "repository": {
     "type": "git",
