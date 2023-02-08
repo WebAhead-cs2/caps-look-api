@@ -1,5 +1,4 @@
 const db = require('../connection')
-const db = require('../connection')
 
 const createProject = async (
   project_name,
@@ -27,4 +26,5 @@ const getProjects = async () => {
   const projectTable = await db.query(`SELECT * FROM project`)
   return projectTable.rows
 }
+
 module.exports = { createProject, editProject, getProjects }
