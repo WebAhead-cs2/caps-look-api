@@ -12,4 +12,3 @@ db.query(mockDataSQL)
     db.end()
   })
   .catch(console.log)
-  

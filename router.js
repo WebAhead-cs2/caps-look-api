@@ -4,5 +4,5 @@ const projectController = require('./controllers/projects.controller')
 
 router.get('/', generalController.home)
 router.get('/projects', projectController.getProjectsController)
-router.get('/ProjectPage',projectController.showProjectsData)
+router.get('/ProjectPage', projectController.showProjectsData)
 module.exports = router
