@@ -1,6 +1,5 @@
 const catchAsync = require('../utils/catchAsync')
 const ApiError = require('../utils/ApiError')
-
 const home = catchAsync((req, res) => {
   res.send('Hello, World!')
 })
