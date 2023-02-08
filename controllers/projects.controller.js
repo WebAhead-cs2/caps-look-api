@@ -18,22 +18,23 @@ const getProjectsController = catchAsync(async (req, res) => {
 })
 
 const AddingProject = catchAsync(async (req, res) => {
-    const addedData = await createProject( req.body.ProjectName, req.body.StartDate, req.body.PiNumber )
-    if (addedData) {
-      res.status(200).json({
-        message: 'create project is done successfully',
-        data: addedData
-      })
-    } else {
-      res.status(200).json({
-        message: 'Adding project is failed',
-        data: ''
-      })
-    }
-  
-
+  const addedData = await createProject(
+    req.body.ProjectName,
+    req.body.StartDate,
+    req.body.PiNumber
+  )
+  if (addedData) {
+    res.status(200).json({
+      message: 'create project is done successfully',
+      data: addedData
+    })
+  } else {
+    res.status(200).json({
+      message: 'Adding project is failed',
+      data: ''
+    })
+  }
 })
-
 
 module.exports = {
   getProjectsController,
