@@ -5,4 +5,6 @@ const projectController = require('./controllers/projects.controller')
 router.get('/', generalController.home)
 router.get('/projects', projectController.getProjectsController)
 router.get('/ProjectPage', projectController.showProjectsData)
+router.post('/AddingProject', projectController.addingProject)
+
 module.exports = router
