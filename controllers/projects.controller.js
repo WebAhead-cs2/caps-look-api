@@ -37,8 +37,12 @@ const showProjectsData = catchAsync(async (req, res) => {
 })
 
 const editProjectDetails = catchAsync(async (req, res) => {
-
-  const data = await editProject(req.body.ProjectName, parseInt(req.body.PiNumber), req.body.StartDate,req.params.id);
+  const data = await editProject(
+    req.body.ProjectName,
+    parseInt(req.body.PiNumber),
+    req.body.StartDate,
+    req.params.id
+  )
   console.log(data)
   if (data) {
     res.status(200).json({

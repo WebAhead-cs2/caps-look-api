@@ -14,12 +14,12 @@ const editProject = async (
   project_name,
   project_iterations_count,
   start_date,
-  
+
   id
 ) => {
   return await db.query(
     `UPDATE project SET project_name= $1,project_iterations_count=$2 ,start_date=$3  where id=$4`,
-    [project_name,project_iterations_count, start_date ,id]
+    [project_name, project_iterations_count, start_date, id]
   )
 }
 
