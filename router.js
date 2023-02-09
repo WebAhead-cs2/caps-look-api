@@ -1,8 +1,8 @@
 const router = require('express').Router()
 const generalController = require('./controllers/general.controller')
-const absencecontroller = require('./controllers/absence.controller')
-const employeecontroller = require('./controllers/employee.controller')
-const projectscontroller = require('./controllers/project.controller')
+const absenceController = require('./controllers/absence.controller')
+const employeeController = require('./controllers/employee.controller')
+const projectsController = require('./controllers/project.controller')
 
 router.get('/', generalController.home)
 
