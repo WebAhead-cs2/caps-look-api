@@ -35,7 +35,7 @@ const showProjectsData = catchAsync(async (req, res) => {
     })
   }
 })
-const AddingProject = catchAsync(async (req, res) => {
+const addingProject = catchAsync(async (req, res) => {
   const addedData = await createProject(
     req.body.ProjectName,
     req.body.StartDate,
@@ -54,6 +54,6 @@ const AddingProject = catchAsync(async (req, res) => {
 })
 module.exports = {
   getProjectsController,
-  AddingProject,
+  addingProject,
   showProjectsData
 }
