@@ -1,8 +1,9 @@
+
 const router = require("express").Router()
 const generalController = require("./controllers/general.controller")
 const absencecontroller = require("./controllers/absence.controller")
 const employeecontroller = require("./controllers/employee.controller")
-const projectscontroller =(require("./controllers/project.controller"))
+const projectscontroller = require("./controllers/project.controller")
 
 
 
@@ -23,9 +24,12 @@ router.delete("/delete-employee",employeecontroller.deleteemployee)
 
 
 // project json
-router.get("/getProjects", projectscontroller.getProjects)
+router.get("/projects", projectscontroller.getProjectsController)
 router.put("/edit-project", projectscontroller.editproject)
 router.post("/add-project",projectscontroller.addproject)
 router.delete("/delete-project",projectscontroller.deleteproject)
+
+router.get('/ProjectPage', projectscontroller.showProjectsData)
+
 
 module.exports = router
