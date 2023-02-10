@@ -3,8 +3,10 @@ const ApiError = require('../utils/ApiError')
 const { createProject } = require('../database/models/Project')
 const {
   getProjects,
-  getProjectsDetails
+  getProjectsDetails,
+  editProject
 } = require('../database/models/Project')
+const logger = require('../logger')
 
 const getProjectsController = catchAsync(async (req, res) => {
   const data = await getProjects()
@@ -35,11 +37,39 @@ const showProjectsData = catchAsync(async (req, res) => {
     })
   }
 })
+
+const editProjectDetails = catchAsync(async (req, res) => {
+  const data = await editProject(
+    req.body.ProjectName,
+    req.body.PiNumber,
+    req.body.StartDate,
+    req.params.id
+  )
+  logger.info(
+    `the data ${req.body.ProjectName},${req.body.PiNumber},${req.body.StartDate} edited successfully`
+  )
+
+  if (data) {
+    res.status(200).json({
+      message: 'the project edited successfully',
+      data: data
+    })
+  } else {
+    res.status(200).json({
+      message: 'failed to edit project',
+      data: ''
+    })
+  }
+})
+
 const addingProject = catchAsync(async (req, res) => {
   const addedData = await createProject(
     req.body.ProjectName,
     req.body.StartDate,
     req.body.PiNumber
+  )
+  logger.info(
+    `the data ${req.body.ProjectName},${req.body.StartDate},${req.body.PiNumber} inserted successfully`
   )
   if (addedData) {
     res.status(200).json({
@@ -55,5 +85,6 @@ const addingProject = catchAsync(async (req, res) => {
 module.exports = {
   getProjectsController,
   addingProject,
-  showProjectsData
+  showProjectsData,
+  editProjectDetails
 }

@@ -5,6 +5,8 @@ const authorizeMiddleware = require('./middleware/authorization')
 const verifyToken = require('./middleware/verifyUser')
 
 router.get('/', generalController.home)
+router.put('/EditProject/:id', projectController.editProjectDetails)
+
 router.get(
   '/projects',
   verifyToken,

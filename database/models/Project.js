@@ -11,14 +11,14 @@ const createProject = async (
   )
 }
 const editProject = async (
-  id,
   project_name,
+  project_iterations_count,
   start_date,
-  project_iterations_count
+  id
 ) => {
   return await db.query(
-    `UPDATE project SET project_name= ($2), start_date=($3), project_iterations_count=($4) WHERE id = ($1)`,
-    [id, project_name, start_date, project_iterations_count]
+    `UPDATE project SET project_name= $1,project_iterations_count=$2 ,start_date=$3  where id=$4`,
+    [project_name, project_iterations_count, start_date, id]
   )
 }
 
@@ -30,7 +30,7 @@ const getProjects = async () => {
 
 const getProjectsDetails = async () => {
   const data = await db.query(
-    'SELECT project.project_name,(SELECT COUNT(*) FROM iteration where project_id=project.id) as iteration_number, (SELECT COUNT(*) FROM scrum where project_id=project.id) as scrum_number,(SELECT COUNT(*) FROM employee WHERE employee.project_id = project.id) as employee_number FROM project'
+    'SELECT project.project_name,project.id,project.start_date,(SELECT COUNT(*) FROM iteration where project_id=project.id) as iteration_number, (SELECT COUNT(*) FROM scrum where project_id=project.id) as scrum_number,(SELECT COUNT(*) FROM employee WHERE employee.project_id = project.id) as employee_number FROM project'
   )
   return data.rows
 }
