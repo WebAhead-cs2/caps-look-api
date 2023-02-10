@@ -7,15 +7,14 @@ module.exports = async (req, res) => {
     const results = await db.query('SELECT * FROM employee WHERE email = $1', [
       email
     ])
-    console.log(results.rows)
-    //
+
     if (results.rows.length === 0) {
       return res.status(403).send({
         success: false,
         message: ' In correst email or password'
       })
     }
-    //
+
     const user = results.rows[0]
 
     const isCorrectpass = await bcrypt.compare(password, user.password)
@@ -27,7 +26,10 @@ module.exports = async (req, res) => {
       })
     }
 
-    const token = jwt.sign({ id: user.id }, process.env.TOKEN_SECRET)
+    const token = jwt.sign(
+      { id: user.id, access_tier: user.access_tier },
+      process.env.TOKEN_SECRET
+    )
     res.cookie('userToken', token)
     res.status(200).send({
       success: true,
