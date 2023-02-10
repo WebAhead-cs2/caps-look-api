@@ -6,4 +6,5 @@ router.get('/', generalController.home)
 router.get('/projects', projectController.getProjectsController)
 router.get('/ProjectPage', projectController.showProjectsData)
 router.put('/EditProject/:id', projectController.editProjectDetails)
+router.post('/AddingProject', projectController.addingProject)
 module.exports = router

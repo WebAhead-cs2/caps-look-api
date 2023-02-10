@@ -12,3 +12,17 @@
 
 API's Definition : visit this link >>>
 https://documenter.getpostman.com/view/25516578/2s935hQSCX#8c4b2b19-f5b9-48f0-ad17-5b1ef2aed851
+
+## db migration
+
+To create new migrate:
+
+`$ npm run migrate:create [migration name]`
+
+To up migrate run:
+`npm run migrate:up`
+
+To down migrate run:
+`npm run migrate:down`
+
+documentations: https://github.com/salsita/node-pg-migrate

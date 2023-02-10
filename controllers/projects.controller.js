@@ -1,5 +1,6 @@
 const catchAsync = require('../utils/catchAsync')
 const ApiError = require('../utils/ApiError')
+const { createProject } = require('../database/models/Project')
 const {
   getProjects,
   getProjectsDetails,
@@ -43,7 +44,6 @@ const editProjectDetails = catchAsync(async (req, res) => {
     req.body.StartDate,
     req.params.id
   )
-  console.log(data)
   if (data) {
     res.status(200).json({
       message: 'the project edited successfully',
@@ -57,8 +57,26 @@ const editProjectDetails = catchAsync(async (req, res) => {
   }
 })
 
+const addingProject = catchAsync(async (req, res) => {
+  const addedData = await createProject(
+    req.body.ProjectName,
+    req.body.StartDate,
+    req.body.PiNumber
+  )
+  if (addedData) {
+    res.status(200).json({
+      message: 'create project is done successfully',
+      data: addedData
+    })
+  } else {
+    res.status(200).json({
+      message: 'Adding project is failed'
+    })
+  }
+})
 module.exports = {
   getProjectsController,
+  addingProject,
   showProjectsData,
   editProjectDetails
 }

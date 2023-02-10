@@ -35,4 +35,5 @@ const getProjectsDetails = async () => {
   )
   return data.rows
 }
+
 module.exports = { createProject, editProject, getProjects, getProjectsDetails }
