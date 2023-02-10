@@ -6,6 +6,7 @@ const {
   getProjectsDetails,
   editProject
 } = require('../database/models/Project')
+const logger = require('../logger')
 
 const getProjectsController = catchAsync(async (req, res) => {
   const data = await getProjects()
@@ -40,10 +41,14 @@ const showProjectsData = catchAsync(async (req, res) => {
 const editProjectDetails = catchAsync(async (req, res) => {
   const data = await editProject(
     req.body.ProjectName,
-    parseInt(req.body.PiNumber),
+    req.body.PiNumber,
     req.body.StartDate,
     req.params.id
   )
+  logger.info(
+    `the data ${req.body.ProjectName},${req.body.PiNumber},${req.body.StartDate} edited successfully`
+  )
+
   if (data) {
     res.status(200).json({
       message: 'the project edited successfully',
@@ -62,6 +67,9 @@ const addingProject = catchAsync(async (req, res) => {
     req.body.ProjectName,
     req.body.StartDate,
     req.body.PiNumber
+  )
+  logger.info(
+    `the data ${req.body.ProjectName},${req.body.StartDate},${req.body.PiNumber} inserted successfully`
   )
   if (addedData) {
     res.status(200).json({

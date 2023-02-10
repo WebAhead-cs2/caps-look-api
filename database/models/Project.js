@@ -14,7 +14,6 @@ const editProject = async (
   project_name,
   project_iterations_count,
   start_date,
-
   id
 ) => {
   return await db.query(
