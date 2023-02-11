@@ -90,7 +90,7 @@ const addingProject = catchAsync(async (req, res) => {
 
 
 const getProjectSiteMixController = catchAsync(async (req, res) => {
-  const projectId=req.params.id
+  const projectId = req.params.id
   const data = await getProjectSiteMix(projectId)
   
   if (data) {
@@ -108,7 +108,7 @@ const getProjectSiteMixController = catchAsync(async (req, res) => {
 
 
 const updateProjectSiteMixController = catchAsync(async (req, res) => {
-  const {projectId,planMix}=req.body
+  const {projectId,planMix} = req.body
   const data = await updateProjectSiteMix({projectId,planMix})
   if (data) {
     res.status(200).json({
@@ -124,7 +124,7 @@ const updateProjectSiteMixController = catchAsync(async (req, res) => {
 })
 
 const getActualSiteMixController = catchAsync(async (req, res) => {
-  const projectId=req.params.id
+  const projectId = req.params.id
   const data = await getActualSiteMix(projectId)
   
   if (data) {
