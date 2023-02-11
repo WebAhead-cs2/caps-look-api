@@ -37,4 +37,5 @@ const getAbsences = async () => {
   const absenceTable = await db.query(`SELECT * FROM absence`)
   return absenceTable.rows
 }
+
 module.exports = { createAbsence, editAbsence, deleteAbsence, getAbsences }
