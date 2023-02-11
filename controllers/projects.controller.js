@@ -4,7 +4,10 @@ const { createProject } = require('../database/models/Project')
 const {
   getProjects,
   getProjectsDetails,
-  editProject
+  editProject,
+  getProjectSiteMix,
+  updateProjectSiteMix,
+  getActualSiteMix
 } = require('../database/models/Project')
 const logger = require('../logger')
 
@@ -43,10 +46,11 @@ const editProjectDetails = catchAsync(async (req, res) => {
     req.body.ProjectName,
     req.body.PiNumber,
     req.body.StartDate,
-    req.params.id
+    req.params.id,
+    req.body.plannedMix
   )
   logger.info(
-    `the data ${req.body.ProjectName},${req.body.PiNumber},${req.body.StartDate} edited successfully`
+    `the data ${req.body.ProjectName},${req.body.PiNumber},${req.body.StartDate},${req.body.plannedMix}  edited successfully`
   )
 
   if (data) {
@@ -67,9 +71,10 @@ const addingProject = catchAsync(async (req, res) => {
     req.body.ProjectName,
     req.body.StartDate,
     req.body.PiNumber
+    ,req.body.plannedMix
   )
   logger.info(
-    `the data ${req.body.ProjectName},${req.body.StartDate},${req.body.PiNumber} inserted successfully`
+    `the data ${req.body.ProjectName},${req.body.StartDate},${req.body.PiNumber},${req.body.plannedMix} inserted successfully`
   )
   if (addedData) {
     res.status(200).json({
@@ -82,9 +87,66 @@ const addingProject = catchAsync(async (req, res) => {
     })
   }
 })
+
+
+const getProjectSiteMixController = catchAsync(async (req, res) => {
+  const projectId=req.params.id
+  const data = await getProjectSiteMix(projectId)
+  
+  if (data) {
+    res.status(200).json({
+      message: 'site mix retrieved successfully.',
+      data: data
+    })
+  } else {
+    res.status(200).json({
+      message: 'project id not found',
+      data: ''
+    })
+  }
+})
+
+
+const updateProjectSiteMixController = catchAsync(async (req, res) => {
+  const {projectId,planMix}=req.body
+  const data = await updateProjectSiteMix({projectId,planMix})
+  if (data) {
+    res.status(200).json({
+      message: 'site mix updated succesfully.',
+      data: data
+    })
+  } else {
+    res.status(200).json({
+      message: 'site mix update failed',
+      data: ''
+    })
+  }
+})
+
+const getActualSiteMixController = catchAsync(async (req, res) => {
+  const projectId=req.params.id
+  const data = await getActualSiteMix(projectId)
+  
+  if (data) {
+    res.status(200).json({
+      message: 'actual site mix retrieved successfully.',
+      data: data
+    })
+  } else {
+    res.status(200).json({
+      message: 'project id not found',
+      data: ''
+    })
+  }
+})
+
+
 module.exports = {
   getProjectsController,
   addingProject,
   showProjectsData,
-  editProjectDetails
+  editProjectDetails,
+  getProjectSiteMixController,
+  updateProjectSiteMixController,
+  getActualSiteMixController
 }
