@@ -1,11 +1,13 @@
 const router = require('express').Router()
 const generalController = require('./controllers/general.controller')
 const projectController = require('./controllers/projects.controller')
+const loginController = require('./controllers/login.controller')
 const authorizeMiddleware = require('./middleware/authorization')
 const verifyToken = require('./middleware/verifyUser')
 
 router.get('/', generalController.home)
 router.put('/EditProject/:id', projectController.editProjectDetails)
+router.post('/login', loginController)
 
 router.get(
   '/projects',
