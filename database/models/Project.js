@@ -5,11 +5,10 @@ const createProject = async (
   start_date,
   project_iterations_count,
   plannedMix
-  
 ) => {
   return await db.query(
     `INSERT INTO project (project_name,planned_site_mix,start_date,project_iterations_count) VALUES ($1,$2,$3,$4) RETURNING *`,
-    [project_name,plannedMix,start_date, project_iterations_count]
+    [project_name, plannedMix, start_date, project_iterations_count]
   )
 }
 const editProject = async (
@@ -21,7 +20,7 @@ const editProject = async (
 ) => {
   return await db.query(
     `UPDATE project SET project_name= $1,planned_site_mix=$2 project_iterations_count=$3 ,start_date=$4  where id=$5`,
-    [project_name,plannedMix,project_iterations_count, start_date, id]
+    [project_name, plannedMix, project_iterations_count, start_date, id]
   )
 }
 
@@ -39,22 +38,35 @@ const getProjectsDetails = async () => {
 }
 
 const getProjectSiteMix = async (projectId) => {
-  
-const sitemix = await db.query(`SELECT planned_site_mix FROM project WHERE id=$1`,[projectId])
-return sitemix.rows
+  const sitemix = await db.query(
+    `SELECT planned_site_mix FROM project WHERE id=$1`,
+    [projectId]
+  )
+  return sitemix.rows
 }
 
-const updateProjectSiteMix = async ({projectId,planMix}) => {
-  
-const sitemix = await db.query(`UPDATE project SET planned_site_mix =$1 WHERE id=$2`,[planMix,projectId])
-return sitemix 
+const updateProjectSiteMix = async ({ projectId, planMix }) => {
+  const sitemix = await db.query(
+    `UPDATE project SET planned_site_mix =$1 WHERE id=$2`,
+    [planMix, projectId]
+  )
+  return sitemix
 }
 
 const getActualSiteMix = async (projectId) => {
-  
-  const sitemix = await db.query(`SELECT site.site_name, COUNT(employee.id_number) AS dedicated_ee FROM EMPLOYEE  INNER JOIN site ON employee.site_id=site.id WHERE employee.project_id=$1 GROUP BY site.site_name;`,[projectId])
+  const sitemix = await db.query(
+    `SELECT site.site_name, COUNT(employee.id_number) AS dedicated_ee FROM EMPLOYEE  INNER JOIN site ON employee.site_id=site.id WHERE employee.project_id=$1 GROUP BY site.site_name;`,
+    [projectId]
+  )
   return sitemix.rows
-} 
-  
+}
 
-module.exports = { createProject, editProject, getProjects, getProjectsDetails, getProjectSiteMix, updateProjectSiteMix,getActualSiteMix }
+module.exports = {
+  createProject,
+  editProject,
+  getProjects,
+  getProjectsDetails,
+  getProjectSiteMix,
+  updateProjectSiteMix,
+  getActualSiteMix
+}

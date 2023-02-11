@@ -70,8 +70,8 @@ const addingProject = catchAsync(async (req, res) => {
   const addedData = await createProject(
     req.body.ProjectName,
     req.body.StartDate,
-    req.body.PiNumber
-    ,req.body.plannedMix
+    req.body.PiNumber,
+    req.body.plannedMix
   )
   logger.info(
     `the data ${req.body.ProjectName},${req.body.StartDate},${req.body.PiNumber},${req.body.plannedMix} inserted successfully`
@@ -88,11 +88,10 @@ const addingProject = catchAsync(async (req, res) => {
   }
 })
 
-
 const getProjectSiteMixController = catchAsync(async (req, res) => {
   const projectId = req.params.id
   const data = await getProjectSiteMix(projectId)
-  
+
   if (data) {
     res.status(200).json({
       message: 'site mix retrieved successfully.',
@@ -106,10 +105,9 @@ const getProjectSiteMixController = catchAsync(async (req, res) => {
   }
 })
 
-
 const updateProjectSiteMixController = catchAsync(async (req, res) => {
-  const {projectId,planMix} = req.body
-  const data = await updateProjectSiteMix({projectId,planMix})
+  const { projectId, planMix } = req.body
+  const data = await updateProjectSiteMix({ projectId, planMix })
   if (data) {
     res.status(200).json({
       message: 'site mix updated succesfully.',
@@ -126,7 +124,7 @@ const updateProjectSiteMixController = catchAsync(async (req, res) => {
 const getActualSiteMixController = catchAsync(async (req, res) => {
   const projectId = req.params.id
   const data = await getActualSiteMix(projectId)
-  
+
   if (data) {
     res.status(200).json({
       message: 'actual site mix retrieved successfully.',
@@ -139,7 +137,6 @@ const getActualSiteMixController = catchAsync(async (req, res) => {
     })
   }
 })
-
 
 module.exports = {
   getProjectsController,
