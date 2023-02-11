@@ -1,6 +1,7 @@
 const db = require('../database/connection')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+
 module.exports = async (req, res) => {
   const { email, password } = req.body
   try {
@@ -14,10 +15,16 @@ module.exports = async (req, res) => {
         message: ' In correst email or password'
       })
     }
-
+    
     const user = results.rows[0]
+    
+    console.log(bcrypt.hashSync(password,10));
 
     const isCorrectpass = await bcrypt.compare(password, user.password)
+    
+    console.log(user.password);
+    console.log(password);
+    console.log(isCorrectpass);
 
     if (!isCorrectpass) {
       return res.status(403).send({
