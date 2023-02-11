@@ -9,7 +9,6 @@ router.get('/', generalController.home)
 router.put('/EditProject/:id', projectController.editProjectDetails)
 router.post('/login', loginController)
 
-
 router.get(
   '/projects',
   verifyToken,
