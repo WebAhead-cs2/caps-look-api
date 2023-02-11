@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken')
 module.exports = async (req, res) => {
   const { email, password } = req.body
   try {
-    const results = await db.query('SELECT * FROM employee WHERE email = $1', [
+    const results = await db.query('SELECT * FROM users WHERE email = $1', [
       email
     ])
 
@@ -15,11 +15,11 @@ module.exports = async (req, res) => {
         message: ' In correst email or password'
       })
     }
-
+    
     const user = results.rows[0]
-
+    
     const isCorrectpass = await bcrypt.compare(password, user.password)
-
+    
     if (!isCorrectpass) {
       return res.status(403).send({
         success: false,
