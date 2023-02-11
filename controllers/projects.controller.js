@@ -71,10 +71,34 @@ const addingProject = catchAsync(async (req, res) => {
   logger.info(
     `the data ${req.body.ProjectName},${req.body.StartDate},${req.body.PiNumber} inserted successfully`
   )
-  if (addedData) {
+  if (
+    req.body.ProjectName !== '' &&
+    req.body.StartDate !== null &&
+    req.body.PiNumber !== null
+  ) {
     res.status(200).json({
       message: 'create project is done successfully',
       data: addedData
+    })
+  } else if (req.body.ProjectName == '') {
+    res.status(200).json({
+      message: 'Please Inseat a name for the project'
+    })
+  } else if (req.body.PiNumber == null) {
+    res.status(200).json({
+      message: 'Please Inseat number of iterations'
+    })
+  } else if (req.body.StartDate == null) {
+    res.status(200).json({
+      message: 'Please Inseat starting date for the project'
+    })
+  } else if (
+    req.body.ProjectName == '' &&
+    req.body.StartDate == null &&
+    req.body.PiNumber == null
+  ) {
+    res.status(200).json({
+      message: 'Please Inseat data'
     })
   } else {
     res.status(200).json({
