@@ -108,12 +108,12 @@ INSERT INTO employee_scrum (employee_id, scrum_id) VALUES
 
 --users
 INSERT INTO users (employee_id, email, password) VALUES 
-(1, 'majd@gmail.com', 'majd'),
-(8, 'mario@gmail.com', 'mario'),
-(15, 'tawfik@gmail.com', 'tawfik'),
-(22, 'riham@gmail.com', 'riham'),
-(29, 'khalid@gmail.com', 'khalid'), 
-(30, 'sally@gmail.com', 'sally');
+(1, 'majd@gmail.com', '$2b$10$P6Qy.j8DI5BtKYi08/UGhuQ94QDDVmhNNObW3gvDtSrO6OB2n.x96'),      --password: "majd"
+(8, 'mario@gmail.com', '$2b$10$JJXMcAAyAvKhAnHmOjY5TuKKxNNv20YwRnQZtDXKICT2ZVkRGiv2a'),     --password: "mario" 
+(15, 'tawfik@gmail.com', '$2b$10$6YCWLAGC7b9wS12TS8H5VOEEeG0v989fyc9TWuPDw9FIV87dL3arC'),   --password: "tawfik" 
+(22, 'riham@gmail.com', '$2b$10$lR.Tp43V5wcQXG33nZetOe5cQ/rhQ6PpuBhPfKvVsPHhl8jSc1PMm'),    --password: "riham" 
+(29, 'khalid@gmail.com', '$2b$10$5ZXDDayBVkmROPxSPXpdXeBHEVzL.hQtWirCEr.pLQqxpS89.YrOG'),   --password: "khalid" 
+(30, 'sally@gmail.com', '$2b$10$w.bzMY3RLihEHB.Xm9KdHedzp1dONPQcrJtdm3XmKjZbt4WVusHZe');    --password: "sally" 
 
 -- absence
 INSERT INTO absence (absence_name, site_id, mandatory, absence_start_date, absence_end_date) VALUES

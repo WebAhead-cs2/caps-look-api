@@ -1,10 +1,11 @@
 const db = require('../database/connection')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+
 module.exports = async (req, res) => {
   const { email, password } = req.body
   try {
-    const results = await db.query('SELECT * FROM employee WHERE email = $1', [
+    const results = await db.query('SELECT * FROM users WHERE email = $1', [
       email
     ])
 
