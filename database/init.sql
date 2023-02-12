@@ -18,8 +18,10 @@ CREATE TABLE site (
 CREATE TABLE project (
    id SERIAL PRIMARY KEY,
    project_name VARCHAR(255),
+   planned_site_mix jsonb,
    start_date DATE,
    project_iterations_count INTEGER
+   
 );
 
 CREATE TABLE iteration (

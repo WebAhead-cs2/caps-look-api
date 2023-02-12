@@ -5,8 +5,10 @@ BEGIN;
 INSERT INTO site (site_name, country_name) VALUES ('Nazareth','israel'),('Rannana','israel'),('Pune','india');
 
 --project
-INSERT INTO project (project_name, start_date, project_iterations_count) VALUES 
-('VR','2021-08-17',2),('SES','2021-05-10',2),('ARM','2022-03-25',2),('OPTIMA','2022-07-27',1);
+INSERT INTO project (project_name,planned_site_mix,start_date, project_iterations_count) VALUES 
+('VR','{"Nazareth":"10","Pune":"5"}','2021-08-17',2),('SES','{"Nazareth":"12","Rannana":"2"}','2021-05-10',2),
+('ARM','{"Rannana":"4","Pune":"10"}','2022-03-25',2),('OPTIMA','{"Nazareth":"15","Pune":"6"}','2022-07-27',1);
+
 
 --application
 INSERT INTO application (application_name, project_id) VALUES 
