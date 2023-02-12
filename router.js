@@ -31,20 +31,20 @@ router.get(
   '/GetPlannedSiteMix/:id',
   verifyToken,
   authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
-  projectController.getProjectSiteMix
+  projectController.getProjectSiteMixController
 )
 
 router.put(
   '/UpdatePlannedSiteMix',
   verifyToken,
   authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
-  projectController.updateProjectSiteMix
+  projectController.updateProjectSiteMixController
 )
 
 router.get(
   '/GetActualSiteMix/:id',
   verifyToken,
   authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
-  projectController.getActualSiteMix
+  projectController.getActualSiteMixController
 )
 module.exports = router
