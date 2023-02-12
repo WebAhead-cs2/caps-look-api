@@ -5,9 +5,10 @@ const jwt = require('jsonwebtoken')
 module.exports = async (req, res) => {
   const { email, password } = req.body
   try {
-    const results = await db.query('SELECT * FROM users WHERE email = $1', [
-      email
-    ])
+    const results = await db.query(
+      'SELECT * FROM users INNER JOIN employee ON users.employee_id = employee.id WHERE users.email = $1',
+      [email]
+    )
 
     if (results.rows.length === 0) {
       return res.status(403).send({
