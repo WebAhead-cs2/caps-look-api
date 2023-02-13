@@ -7,9 +7,10 @@ module.exports = async (req, res) => {
   const password = req.body.password
   try {
     const results = await db.query(
-      'SELECT password FROM users WHERE users.email = $1',
+      'SELECT * FROM users INNER JOIN employee ON users.employee_id = employee.id WHERE users.email = $1',
       [email]
     )
+
     console.log(results)
     if (results.rows.length === 0) {
       return res.status(403).send({

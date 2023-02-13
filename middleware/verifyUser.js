@@ -6,6 +6,8 @@ module.exports = (req, res, next) => {
   if (!userToken) {
     return res.status(403).send({ success: false })
   }
+
   jwt.verify(userToken, process.env.TOKEN_SECRET)
+
   next()
 }
