@@ -16,6 +16,12 @@ app.use(
     statusLevels: true
   })
 )
+app.use(
+  cors({
+    credentials: true,
+    origin: ['http://localhost:3000']
+  })
+)
 
 const errmessage = format.printf(({ level, meta, timestamp }) => {
   return ` ${timestamp} ${level}: ${meta.message}`
