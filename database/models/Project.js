@@ -37,9 +37,9 @@ const getProjectsDetails = async () => {
   return data.rows
 }
 const archivedProject = async (project_id) => {
-  await db.query(
-    `UPDATE project SET isarchived=true  where id=$1 `, [project_id]
-  )
+  await db.query(`UPDATE project SET isarchived=true  where id=$1 `, [
+    project_id
+  ])
 }
 const getProjectSiteMix = async (projectId) => {
   const sitemix = await db.query(

@@ -138,7 +138,7 @@ const getActualSiteMixController = catchAsync(async (req, res) => {
   }
 })
 const moveToArchive = async (req, res) => {
-  const data = await archivedProject(parseInt(req.params.id));
+  const data = await archivedProject(parseInt(req.params.id))
   if (data) {
     res.status(200).json({
       message: 'the project moved to archived successfully',
