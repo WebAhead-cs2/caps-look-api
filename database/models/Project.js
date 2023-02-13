@@ -15,12 +15,12 @@ const editProject = async (
   project_name,
   project_iterations_count,
   start_date,
-  id,
-  plannedMix
+  //plannedMix,
+  id
 ) => {
   return await db.query(
-    `UPDATE project SET project_name= $1,planned_site_mix=$2 project_iterations_count=$3 ,start_date=$4  where id=$5`,
-    [project_name, plannedMix, project_iterations_count, start_date, id]
+    `UPDATE project SET project_name= $1, project_iterations_count=$2 ,start_date=$3 where id=$4`,
+    [project_name, project_iterations_count, start_date, id]
   )
 }
 
@@ -32,11 +32,15 @@ const getProjects = async () => {
 
 const getProjectsDetails = async () => {
   const data = await db.query(
-    'SELECT project.project_name,project.id,project.start_date,(SELECT COUNT(*) FROM iteration where project_id=project.id) as iteration_number, (SELECT COUNT(*) FROM scrum where project_id=project.id) as scrum_number,(SELECT COUNT(*) FROM employee WHERE employee.project_id = project.id) as employee_number FROM project'
+    'SELECT project.project_name,project.id,project.start_date,(SELECT COUNT(*) FROM iteration where project_id=project.id) as iteration_number, (SELECT COUNT(*) FROM scrum where project_id=project.id) as scrum_number,(SELECT COUNT(*) FROM employee WHERE employee.project_id = project.id) as employee_number FROM project where isarchived=false'
   )
   return data.rows
 }
-
+const archivedProject = async (project_id) => {
+  await db.query(
+    `UPDATE project SET isarchived=true  where id=$1 `, [project_id]
+  )
+}
 const getProjectSiteMix = async (projectId) => {
   const sitemix = await db.query(
     `SELECT planned_site_mix FROM project WHERE id=$1`,
@@ -68,5 +72,6 @@ module.exports = {
   getProjectsDetails,
   getProjectSiteMix,
   updateProjectSiteMix,
-  getActualSiteMix
+  getActualSiteMix,
+  archivedProject
 }

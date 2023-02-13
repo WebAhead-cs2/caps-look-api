@@ -47,4 +47,5 @@ router.get(
   authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
   projectController.getActualSiteMixController
 )
+router.put('/Archive/:id', projectController.moveToArchive)
 module.exports = router
