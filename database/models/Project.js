@@ -4,7 +4,7 @@ const createProject = async (
   project_name,
   start_date,
   project_iterations_count,
-  plannedMix
+  plannedMix = {}
 ) => {
   return await db.query(
     `INSERT INTO project (project_name,planned_site_mix,start_date,project_iterations_count) VALUES ($1,$2,$3,$4) RETURNING *`,
@@ -16,10 +16,10 @@ const editProject = async (
   project_iterations_count,
   start_date,
   id,
-  plannedMix
+  plannedMix = {}
 ) => {
   return await db.query(
-    `UPDATE project SET project_name= $1,planned_site_mix=$2 project_iterations_count=$3 ,start_date=$4  where id=$5`,
+    `UPDATE project SET project_name= $1,planned_site_mix=$2, project_iterations_count=$3 ,start_date=$4  where id=$5`,
     [project_name, plannedMix, project_iterations_count, start_date, id]
   )
 }

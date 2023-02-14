@@ -11,22 +11,23 @@ router.post('/login', loginController)
 
 router.get(
   '/projects',
-  // verifyToken,
-  // authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
   projectController.getProjectsController
 )
 router.get(
   '/ProjectPage',
-  // verifyToken,
-  // authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
   projectController.showProjectsData
 )
 router.post(
   '/AddingProject',
-  // verifyToken,
-  // authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
   projectController.addingProject
 )
+
 router.get(
   '/GetPlannedSiteMix/:id',
   verifyToken,
