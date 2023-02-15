@@ -5,6 +5,7 @@ const loginController = require('./controllers/login.controller')
 const authorizeMiddleware = require('./middleware/authorization')
 const verifyToken = require('./middleware/verifyUser')
 const auth = require('./controllers/auth.controller')
+
 router.get('/', generalController.home)
 router.put('/EditProject/:id', projectController.editProjectDetails)
 router.post('/login', loginController)
@@ -27,6 +28,8 @@ router.post(
   authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
   projectController.addingProject
 )
+router.get('/Logout', auth.logout)
+
 router.get(
   '/GetPlannedSiteMix/:id',
   verifyToken,
