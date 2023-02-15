@@ -1,7 +1,7 @@
 const catchAsync = require('../utils/catchAsync')
 const db = require('../database/connection')
 
-const getProjects = catchAsync((req, res) => {
+const getProjectsController = catchAsync((req, res) => {
   db.query('SELECT * FROM project ')
     .then((result) => {
       const data = result.rows
@@ -84,7 +84,7 @@ const deleteproject = catchAsync((req, res) => {
 })
 
 module.exports = {
-  getProjects,
+  getProjectsController,
   editproject,
   addproject,
   deleteproject

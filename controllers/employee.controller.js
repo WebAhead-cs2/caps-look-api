@@ -1,89 +1,84 @@
 const catchAsync = require('../utils/catchAsync')
-const db = require('../database/connection')
+const ApiError = require('../utils/ApiError')
+const {
+  createEmployee,
+  editEmployee,
+  deleteEmployee, 
+  getEmployees
+} = require('../database/models/Employee')
 
-const getEmployees = catchAsync((req, res) => {
-  db.query('SELECT * FROM employee ')
-    .then((result) => {
-      const data = result.rows
+const getEmployeesController = catchAsync(async(req, res) => {
+  const data = await getEmployees()
+    if(data){
       res.status(200).send({
         successmsg: 'all Employees retrieved successfully.',
-        data: result.rows
+        data: data
       })
-      if (data.length === 0) {
+    if (data.length === 0) {
         msg: 'No Employees provided!'
       }
-    })
-    .catch(() => {
+    }
+    else{
       res.status(500).send({
         msg: 'Unexpected error!!'
       })
-    })
-})
+    }})
 
-const editemployee = catchAsync((req, res) => {
-  db.query('SELECT * FROM employee ')
-    .then((result) => {
-      const data = result.rows
+
+const editemployeeController = catchAsync(async(req, res) => {
+  const data = await editEmployee()
+  if(data){
       res.status(200).send({
         successmsg: 'Employee details updated successfully',
-        data: result.rows
-      })
-      if (data.length === 0) {
+        data: data
+  })
+}
+    if (data.length === 0) {
         msg: 'The employee could not be updated'
       }
-    })
-    .catch(() => {
+    else{
       res.status(500).send({
-        msg: 'Server Error'
-      })
+      msg: 'Server error!!'
     })
-    .catch(() => {
-      res.status(400).send({
-        msg: 'Invalid input'
-      })
+    res.status(400).send({
+      msg: 'Invalid input'
     })
-})
+}})
 
-const addemployee = catchAsync((req, res) => {
-  db.query('SELECT * FROM employee ')
-    .then((result) => {
-      const data = result.rows
+const addemployeeCntroller = catchAsync(async(req, res) => {
+  const data = await createEmployee()
+  if(data){
       res.status(200).send({
         successmsg: 'Employee added successfully',
-        data: result.rows
+        data: data
       })
-    })
-    .catch(() => {
-      res.status(500).send({
-        msg: 'Server Error'
-      })
-    })
-    .catch(() => {
-      res.status(400).send({
-        msg: 'Invalid input'
-      })
-    })
-})
+   }
+   else{
+    res.status(500).send({
+    msg: 'Server error!!'
+  })
+  res.status(400).send({
+    msg: 'Invalid input'
+  })
+}})
 
-const deleteemployee = catchAsync((req, res) => {
-  db.query('SELECT * FROM employee ')
-    .then((result) => {
-      const data = result.rows
+const deleteemployeeController = catchAsync(async(req, res) => {
+  const data = await deleteEmployee()
+  if(data){
       res.status(200).send({
         successmsg: 'The employee has been deleted successfully',
-        data: result.rows
+        data: data
       })
-    })
-    .catch(() => {
+    }
+    else{
       res.status(500).send({
-        msg: 'server error!!'
-      })
+      msg: 'Server error!!'
     })
-})
+}})
 
 module.exports = {
-  getEmployees,
-  editemployee,
-  addemployee,
-  deleteemployee
+  getEmployeesController,
+  editemployeeController,
+  addemployeeCntroller,
+  deleteemployeeController
 }

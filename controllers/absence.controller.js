@@ -1,82 +1,81 @@
 const catchAsync = require('../utils/catchAsync')
-const db = require('../database/connection')
+const ApiError = require('../utils/ApiError')
+const {
+  createAbsence, 
+  editAbsence, 
+  deleteAbsence,
+  getAbsences
+} = require('../database/models/Absence')
 
-const getAbsenece = catchAsync((req, res) => {
-  db.query('SELECT * FROM absence ')
-    .then((result) => {
-      const data = result.rows
+const getAbseneceController = catchAsync(async (req, res) => {
+  const data = await getAbsences()
+    if(data){
       res.status(200).send({
         successmsg: 'Absence retrieved successfully.',
-        data: results.rows
-      })
+        data: data
     })
-    .catch(() => {
+  }
+  else{
       res.status(500).send({
         msg: 'Unexpected error!!'
       })
-    })
-})
+  }})
 
-const editabsence = catchAsync((req, res) => {
-  db.query('SELECT * FROM absence ')
-    .then((result) => {
-      const data = result.rows
+const editabsenceController = catchAsync(async(req, res) => {
+  const data = await editAbsence()
+  if(data){
       res.status(200).send({
         successmsg: 'Absence details updated successfully',
-        data: result.rows
+        data: data
       })
-    })
-    .catch(() => {
-      res.status(500).send({
+  }
+    else{
+        res.status(500).send({
         msg: 'Unexpected error!!'
       })
-    })
-    .catch(() => {
       res.status(400).send({
         msg: 'Invalid input'
       })
-    })
-})
+  }})
+  
 
-const addabsence = catchAsync((req, res) => {
-  db.query('SELECT * FROM absence ')
-    .then((result) => {
+
+const addabsenceController = catchAsync(async(req, res) => {
+  const data = await createAbsence()
+  if(data){
       const data = result.rows
       res.status(200).send({
         successmsg: 'Absence details addeD successfully',
-        data: result.rows
+        data: data
       })
-    })
-    .catch(() => {
-      res.status(500).send({
-        msg: 'Unexpected error!!'
-      })
-    })
-    .catch(() => {
-      res.status(400).send({
-        msg: 'Invalid input'
-      })
-    })
-})
+   }
+   else{
+    res.status(500).send({
+    msg: 'Unexpected error!!'
+  })
+  res.status(400).send({
+    msg: 'Invalid input'
+  })
+}}) 
 
-const deleteAbsenece = catchAsync((req, res) => {
-  db.query('SELECT * FROM absence ')
-    .then((result) => {
+const deleteAbseneceController = catchAsync(async(req, res) => {
+  const data = await deleteAbsence()
+  if(data){
       const data = result.rows
       res.status(200).send({
         successmsg: 'The absence has been deleted successfully',
-        data: result.rows
+        data: data
       })
-    })
-    .catch(() => {
+    }
+    else{
       res.status(500).send({
-        msg: 'server error!!'
+        msg: 'Unexpected error!!'
       })
-    })
-})
+    }})
+
 module.exports = {
-  getAbsenece,
-  editabsence,
-  addabsence,
-  deleteAbsenece
+  getAbseneceController,
+  editabsenceController,
+  addabsenceController,
+  deleteAbseneceController
 }

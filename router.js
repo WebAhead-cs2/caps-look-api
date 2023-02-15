@@ -7,22 +7,22 @@ const projectsController = require('./controllers/project.controller')
 router.get('/', generalController.home)
 
 //absence json
-router.get('/getAbsenece', absencecontroller.getAbsenece)
-router.put('/edit-absence', absencecontroller.editabsence)
-router.post('/add-absence', absencecontroller.addabsence)
-router.delete('/delete-absence', absencecontroller.deleteAbsenece)
+router.get('/getAbsenece', absenceController.getAbseneceController)
+router.put('/edit-absence', absenceController.editabsenceController)
+router.post('/add-absence', absenceController.addabsenceController)
+router.delete('/delete-absence', absenceController.deleteAbseneceController)
 
 //employee json
-router.get('/getEmployees', employeecontroller.getEmployees)
-router.put('/edit-employee', employeecontroller.editemployee)
-router.post('/add-employee', employeecontroller.addemployee)
-router.delete('/delete-employee', employeecontroller.deleteemployee)
+router.get('/getEmployees', employeeController.getEmployeesController)
+router.put('/edit-employee', employeeController.editemployeeController)
+router.post('/add-employee', employeeController.addemployeeCntroller)
+router.delete('/delete-employee', employeeController.deleteemployeeController)
 
 // project json
-router.get('/projects', projectscontroller.getProjectsController)
-router.put('/edit-project', projectscontroller.editproject)
-router.post('/add-project', projectscontroller.addproject)
-router.delete('/delete-project', projectscontroller.deleteproject)
+router.get('/projects', projectsController.getProjectsController)
+router.put('/edit-project', projectsController.editproject)
+router.post('/add-project', projectsController.addproject)
+router.delete('/delete-project', projectsController.deleteproject)
 
 router.get('/ProjectPage', projectscontroller.showProjectsData)
 
