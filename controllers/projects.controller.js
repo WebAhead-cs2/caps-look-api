@@ -7,7 +7,8 @@ const {
   editProject,
   getProjectSiteMix,
   updateProjectSiteMix,
-  getActualSiteMix
+  getActualSiteMix,
+  archivedProject
 } = require('../database/models/Project')
 const logger = require('../logger')
 
@@ -46,8 +47,7 @@ const editProjectDetails = catchAsync(async (req, res) => {
     req.body.ProjectName,
     req.body.PiNumber,
     req.body.StartDate,
-    req.params.id,
-    req.body.plannedMix
+    req.params.id
   )
   logger.info(
     `the data ${req.body.ProjectName},${req.body.PiNumber},${req.body.StartDate},${req.body.plannedMix}  edited successfully`
@@ -137,7 +137,20 @@ const getActualSiteMixController = catchAsync(async (req, res) => {
     })
   }
 })
-
+const moveToArchive = async (req, res) => {
+  const data = await archivedProject(parseInt(req.params.id))
+  if (data) {
+    res.status(200).json({
+      message: 'the project moved to archived successfully',
+      data: data
+    })
+  } else {
+    res.status(200).json({
+      message: 'failed to move to archived',
+      data: ''
+    })
+  }
+}
 module.exports = {
   getProjectsController,
   addingProject,
@@ -145,5 +158,6 @@ module.exports = {
   editProjectDetails,
   getProjectSiteMixController,
   updateProjectSiteMixController,
-  getActualSiteMixController
+  getActualSiteMixController,
+  moveToArchive
 }
