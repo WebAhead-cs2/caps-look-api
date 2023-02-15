@@ -4,7 +4,7 @@ exports.shorthands = undefined
 
 exports.up = (pgm) => {
   pgm.addColumns('employee', {
-    isArchived: { type: 'boolean', default: false }
+    isarchived: { type: 'boolean', default: false }
   })
   pgm.addColumns('scrum', { isarchived: { type: 'boolean', default: false } })
   pgm.addColumns('project', { isarchived: { type: 'boolean', default: false } })
