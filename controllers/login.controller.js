@@ -11,7 +11,6 @@ module.exports = async (req, res) => {
       [email]
     )
 
-    console.log(results)
     if (results.rows.length === 0) {
       return res.status(403).send({
         success: false,

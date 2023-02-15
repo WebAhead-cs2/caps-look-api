@@ -28,6 +28,7 @@ router.post(
   authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
   projectController.addingProject
 )
+
 router.get('/Logout', auth.logout)
 
 router.get(
@@ -50,5 +51,7 @@ router.get(
   authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
   projectController.getActualSiteMixController
 )
+
 router.put('/Archive/:id', projectController.moveToArchive)
+
 module.exports = router
