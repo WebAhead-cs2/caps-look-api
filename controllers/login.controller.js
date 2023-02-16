@@ -1,7 +1,6 @@
 const db = require('../database/connection')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-
 module.exports = async (req, res) => {
   const email = req.body.Email
   const password = req.body.password
@@ -12,7 +11,7 @@ module.exports = async (req, res) => {
     )
 
     if (results.rows.length === 0) {
-      return res.status(403).send({
+      return res.status(403).json({
         success: false,
         message: 'Incorrect password or email'
       })
@@ -22,7 +21,7 @@ module.exports = async (req, res) => {
 
     const isCorrectpass = await bcrypt.compare(password, user.password)
     if (!isCorrectpass) {
-      return res.status(403).send({
+      return res.status(403).json({
         success: false,
         message: 'Incorrect password or email'
       })
@@ -32,6 +31,7 @@ module.exports = async (req, res) => {
       { id: user.id, access_tier: user.access_tier },
       process.env.TOKEN_SECRET
     )
+
     res.cookie('userToken', token)
     res.status(200).json({
       success: true,
@@ -39,6 +39,6 @@ module.exports = async (req, res) => {
     })
   } catch (err) {
     console.log(err.message)
-    res.status(500).send({ success: false })
+    res.status(500).json({ success: false })
   }
 }
