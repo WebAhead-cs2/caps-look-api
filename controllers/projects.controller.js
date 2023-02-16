@@ -90,9 +90,7 @@ const addingProject = catchAsync(async (req, res) => {
       req.body.StartDate,
       req.body.PiNumber
     )
-    logger.info(
-      `the data ${req.body.ProjectName},${req.body.StartDate},${req.body.PiNumber} inserted successfully`
-    )
+
     res.status(200).json({
       message: 'create project done successfully',
       data: addedData
