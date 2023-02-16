@@ -7,7 +7,8 @@ const {
   editProject,
   getProjectSiteMix,
   updateProjectSiteMix,
-  getActualSiteMix
+  getActualSiteMix,
+  archivedProject
 } = require('../database/models/Project')
 const logger = require('../logger')
 
@@ -46,8 +47,7 @@ const editProjectDetails = catchAsync(async (req, res) => {
     req.body.ProjectName,
     req.body.PiNumber,
     req.body.StartDate,
-    req.params.id,
-    req.body.plannedMix
+    req.params.id
   )
   logger.info(
     `the data ${req.body.ProjectName},${req.body.PiNumber},${req.body.StartDate},${req.body.plannedMix}  edited successfully`
@@ -67,19 +67,103 @@ const editProjectDetails = catchAsync(async (req, res) => {
 })
 
 const addingProject = catchAsync(async (req, res) => {
-  const addedData = await createProject(
-    req.body.ProjectName,
-    req.body.StartDate,
-    req.body.PiNumber,
-    req.body.plannedMix
-  )
-  logger.info(
-    `the data ${req.body.ProjectName},${req.body.StartDate},${req.body.PiNumber},${req.body.plannedMix} inserted successfully`
-  )
-  if (addedData) {
+  let regPattern = /^[A-Za-z0-9]*$/
+  let today = new Date()
+  let dd = String(today.getDate()).padStart(2, '0')
+  let mm = String(today.getMonth() + 1).padStart(2, '0')
+  let yyyy = today.getFullYear()
+  today = mm + '/' + dd + '/' + yyyy
+  if (
+    req.body.ProjectName !== '' &&
+    regPattern.test(req.body.ProjectName) &&
+    req.body.ProjectName.length > 1 &&
+    req.body.ProjectName.length < 20 &&
+    req.body.StartDate !== null &&
+    new Date(req.body.StartDate) >= new Date(today) &&
+    req.body.PiNumber !== null &&
+    req.body.PiNumber >= 1 &&
+    req.body.PiNumber < 100 &&
+    !req.body.PiNumber.includes('.')
+  ) {
+    const addedData = await createProject(
+      req.body.ProjectName,
+      req.body.StartDate,
+      req.body.PiNumber
+    )
+
     res.status(200).json({
-      message: 'create project is done successfully',
+      message: 'create project done successfully',
       data: addedData
+    })
+  } else if (
+    req.body.ProjectName == '' &&
+    req.body.StartDate !== null &&
+    req.body.PiNumber !== null
+  ) {
+    res.status(200).json({
+      message: 'Please Insert a name for the project'
+    })
+  } else if (
+    req.body.ProjectName !== '' &&
+    req.body.PiNumber == null &&
+    req.body.StartDate !== null
+  ) {
+    res.status(200).json({
+      message: 'Please Insert number of Pi'
+    })
+  } else if (
+    req.body.ProjectName !== '' &&
+    req.body.StartDate == null &&
+    req.body.PiNumber !== null
+  ) {
+    res.status(200).json({
+      message: 'Please Insert starting date for the project'
+    })
+  } else if (
+    (req.body.ProjectName == '' &&
+      req.body.StartDate == null &&
+      req.body.PiNumber !== null) ||
+    (req.body.ProjectName == '' &&
+      req.body.StartDate !== null &&
+      req.body.PiNumber == null) ||
+    (req.body.ProjectName !== '' &&
+      req.body.StartDate == null &&
+      req.body.PiNumber == null)
+  ) {
+    res.status(200).json({
+      message: 'Field are missing Please insert required data'
+    })
+  } else if (!regPattern.test(req.body.ProjectName)) {
+    res.status(200).json({
+      message: 'Please insert a legal project name'
+    })
+  } else if (
+    req.body.ProjectName.length <= 1 ||
+    req.body.ProjectName.length >= 20
+  ) {
+    res.status(200).json({
+      message:
+        'Name of project should be more than one letter and less than 20 letters'
+    })
+  } else if (new Date(req.body.StartDate) < new Date(today)) {
+    res.status(200).json({
+      message: 'Date of the project shouldnt be from the past'
+    })
+  } else if (req.body.PiNumber < 1 || req.body.PiNumber >= 100) {
+    res.status(200).json({
+      message: 'PI should be a number between 1 and 99 letters'
+    })
+  } else if (req.body.PiNumber.includes('.')) {
+    res.status(200).json({
+      message: 'PI should be a whole number'
+    })
+  } else if (
+    req.body.ProjectName == '' &&
+    req.body.StartDate == null &&
+    req.body.PiNumber == null
+  ) {
+    res.status(200).json({
+      message: 'Please Insert data'
     })
   } else {
     res.status(200).json({
@@ -137,7 +221,20 @@ const getActualSiteMixController = catchAsync(async (req, res) => {
     })
   }
 })
-
+const moveToArchive = async (req, res) => {
+  const data = await archivedProject(parseInt(req.params.id))
+  if (data) {
+    res.status(200).json({
+      message: 'the project moved to archived successfully',
+      data: data
+    })
+  } else {
+    res.status(200).json({
+      message: 'failed to move to archived',
+      data: ''
+    })
+  }
+}
 module.exports = {
   getProjectsController,
   addingProject,
@@ -145,5 +242,6 @@ module.exports = {
   editProjectDetails,
   getProjectSiteMixController,
   updateProjectSiteMixController,
-  getActualSiteMixController
+  getActualSiteMixController,
+  moveToArchive
 }
