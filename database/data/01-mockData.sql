@@ -2,12 +2,12 @@
 BEGIN;
 
 --site
-INSERT INTO site (site_name, country_name) VALUES ('Nazareth','israel'),('Rannana','israel'),('Pune','india');
+INSERT INTO site (site_name, country_name) VALUES ('Nazareth','israel','medium'),('Rannana','israel','high'),('Pune','india','low');
 
 --project
 INSERT INTO project (project_name,planned_site_mix,start_date, project_iterations_count) VALUES 
-('VR','{"Nazareth":"10","Pune":"5"}','2021-08-17',2),('SES','{"Nazareth":"12","Rannana":"2"}','2021-05-10',2),
-('ARM','{"Rannana":"4","Pune":"10"}','2022-03-25',2),('OPTIMA','{"Nazareth":"15","Pune":"6"}','2022-07-27',1);
+('VR','{"low":"20","medium":"10","high":"2"}','2021-08-17',2),('SES','{"low":"10","medium":"12","high":"4"}','2021-05-10',2),
+('ARM','{"low":"8","medium":"4","high":"1"}','2022-03-25',2),('OPTIMA','{"low":"12","medium":"3","high":"3"}','2022-07-27',1);
 
 
 --application
