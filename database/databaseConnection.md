@@ -6,7 +6,7 @@ CREATE DATABASE DataBaseName WITH OWNER username;
 
 add .env file with the connection url with this syntax:
 
-DATABASE_URL=postgres://username:mypassword@localhost:5432/DataBaseName
+DATABASE_URL=postgres://ahmad:mypassword@localhost:5432/databasename
 
 run the sql script files :
 
