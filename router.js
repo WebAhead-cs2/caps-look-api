@@ -49,7 +49,6 @@ router.get(
   projectController.getActualSiteMixController
 )
 
-
 router.get(
   '/sites',
   verifyToken,
@@ -61,9 +60,8 @@ router.put(
   '/editsite',
   verifyToken,
   authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
-  siteController.editSiteDetails  
+  siteController.editSiteDetails
 )
-
 
 router.post(
   '/createsite',
