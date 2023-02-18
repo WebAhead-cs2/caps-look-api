@@ -1,7 +1,7 @@
 BEGIN;
 
 DROP TABLE IF EXISTS job, site,  application, iteration, milestone, scrum, employee,
-employee_scrum, absence, employee_absence, users,project CASCADE;
+employee_scrum, absence, employee_absence, users,project, pgmigrations  CASCADE;
 DROP TYPE IF EXISTS role_access_tier CASCADE;
 
 CREATE TABLE job (
@@ -18,8 +18,10 @@ CREATE TABLE site (
 CREATE TABLE project (
    id SERIAL PRIMARY KEY,
    project_name VARCHAR(255),
+   planned_site_mix jsonb,
    start_date DATE,
    project_iterations_count INTEGER
+   
 );
 
 CREATE TABLE iteration (

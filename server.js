@@ -1,7 +1,7 @@
 // init an express app
 const express = require('express')
 const cors = require('cors')
-
+const cookieParser = require('cookie-parser')
 const router = require('./router')
 const { errorConverter, errorHandler } = require('./middleware/error')
 
@@ -10,10 +10,17 @@ const expressWinston = require('express-winston')
 const { transports, format } = require('winston')
 const logger = require('./logger')
 
+// app.use(
+//   expressWinston.logger({
+//     winstonInstance: logger,
+//     statusLevels: true
+//   })
+// )
+// cors is a middleware that allows us to specify which domains are allowed to access our API
 app.use(
-  expressWinston.logger({
-    winstonInstance: logger,
-    statusLevels: true
+  cors({
+    credentials: true,
+    origin: ['http://localhost:3000']
   })
 )
 
@@ -28,12 +35,7 @@ app.use(
   })
 )
 
-// cors is a middleware that allows us to specify which domains are allowed to access our API
-app.use(
-  cors({
-    origin: ['http://localhost:3000']
-  })
-)
+app.use(cookieParser())
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
