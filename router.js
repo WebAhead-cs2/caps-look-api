@@ -5,10 +5,8 @@ const loginController = require('./controllers/login.controller')
 const authorizeMiddleware = require('./middleware/authorization')
 const verifyToken = require('./middleware/verifyUser')
 const auth = require('./controllers/auth.controller')
-const homecontroller= require('./controllers/home.controller')
+const homecontroller = require('./controllers/home.controller')
 
-router.get('/home',home.controller)
-//router.get('/home',homecontroller)
 router.get('/', generalController.home)
 router.put('/EditProject/:id', projectController.editProjectDetails)
 router.post('/login', loginController)
@@ -55,6 +53,39 @@ router.get(
   projectController.getActualSiteMixController
 )
 
+router.get(
+  '/home/projectStartDay/:id',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  homecontroller.getStartDayController
+)
+router.get(
+  '/home/projectCountEmployees/:id',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  homecontroller.getCountEmployeesControllers
+)
+
+router.get(
+  '/home/projectCountIterations/:id',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  homecontroller.getCountIterationsController
+)
+router.get(
+  '/home/projectCountScrums/:id',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  homecontroller.getCountScrumsController
+)
+router.get(
+  '/home/projectCountSites/:id',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  homecontroller.getCountSitesController
+)
+
 router.put('/Archive/:id', projectController.moveToArchive)
 
+router.get('*', (req, res) => res.send('not found'))
 module.exports = router

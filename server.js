@@ -17,6 +17,7 @@ const logger = require('./logger')
 //   })
 // )
 // cors is a middleware that allows us to specify which domains are allowed to access our API
+//
 app.use(
   cors({
     credentials: true,
