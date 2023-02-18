@@ -1,6 +1,5 @@
 const db = require('../connection')
 
-
 const editEmployee = async (
   id,
   employee_name,
@@ -13,16 +12,7 @@ const editEmployee = async (
 ) => {
   return await db.query(
     `UPDATE employee SET employee_name= ($2),id_number=($3),email=($4),phone=($5),site_id=($6),job_id=($7),access_tier=($8) WHERE id = ($1)`,
-    [
-      id,
-      employee_name,
-      id_number,
-      email,
-      phone,
-      site_id,
-      job_id,
-      access_tier,
-    ]
+    [id, employee_name, id_number, email, phone, site_id, job_id, access_tier]
   )
 }
 
@@ -70,11 +60,17 @@ const addingEmployee = async (
   return await db.query(
     `INSERT INTO employee (id_number,employee_name,email,phone,productivity,site_id,job_id,access_tier) VALUES ($1,$2,$3,$4,$5,$6,$7,$8) RETURNING *`,
     [Id, employeeName, email, phone, productivety, siteId, jobId, accessTier]
-
   )
 }
 const moveEmployeeToArchive = async (id) => {
-  return await db.query(`Update employee set isarchived=true WHERE id = ($1)`, [id])
+  return await db.query(`Update employee set isarchived=true WHERE id = ($1)`, [
+    id
+  ])
 }
-module.exports = { editEmployee, getEmployees, getEmployeeDetails, addingEmployee, moveEmployeeToArchive }
-
+module.exports = {
+  editEmployee,
+  getEmployees,
+  getEmployeeDetails,
+  addingEmployee,
+  moveEmployeeToArchive
+}

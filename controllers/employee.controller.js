@@ -1,6 +1,11 @@
 const catchAsync = require('../utils/catchAsync')
 const ApiError = require('../utils/ApiError')
-const { getEmployeeDetails, addingEmployee, moveEmployeeToArchive, editEmployee } = require('../database/models/Employee')
+const {
+  getEmployeeDetails,
+  addingEmployee,
+  moveEmployeeToArchive,
+  editEmployee
+} = require('../database/models/Employee')
 
 const getEmployeesData = catchAsync(async (req, res) => {
   console.log(2)
@@ -18,7 +23,16 @@ const getEmployeesData = catchAsync(async (req, res) => {
   }
 })
 const addingEmployeeData = catchAsync(async (req, res) => {
-  const addEmployee = await addingEmployee(req.body.Id, req.body.employeeName, req.body.email, req.body.phone, '', req.body.siteId, req.body.jobId, req.body.accessTier)
+  const addEmployee = await addingEmployee(
+    req.body.Id,
+    req.body.employeeName,
+    req.body.email,
+    req.body.phone,
+    '',
+    req.body.siteId,
+    req.body.jobId,
+    req.body.accessTier
+  )
   if (addEmployee) {
     res.status(200).json({
       message: 'adding employee done successfully',
@@ -30,7 +44,6 @@ const addingEmployeeData = catchAsync(async (req, res) => {
       data: ''
     })
   }
-
 })
 const archiveEmployee = async (req, res) => {
   const data = await moveEmployeeToArchive(req.params.id)
@@ -55,7 +68,16 @@ const archiveEmployee = async (req, res) => {
 //   job_id,
 //   access_tier
 const editEmployeeDetails = async (req, res) => {
-  const data = await editEmployee(req.params.id, req.body.employeeName, req.body.Id, req.body.email, req.body.phone, req.body.siteId, req.body.jobId, req.body.accessTier)
+  const data = await editEmployee(
+    req.params.id,
+    req.body.employeeName,
+    req.body.Id,
+    req.body.email,
+    req.body.phone,
+    req.body.siteId,
+    req.body.jobId,
+    req.body.accessTier
+  )
   if (data) {
     res.status(200).json({
       message: 'edit employee details successfully',
@@ -68,4 +90,9 @@ const editEmployeeDetails = async (req, res) => {
     })
   }
 }
-module.exports = { getEmployeesData, addingEmployeeData, archiveEmployee, editEmployeeDetails }
+module.exports = {
+  getEmployeesData,
+  addingEmployeeData,
+  archiveEmployee,
+  editEmployeeDetails
+}
