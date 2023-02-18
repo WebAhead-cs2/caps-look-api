@@ -55,10 +55,10 @@ CREATE TABLE employee (
   employee_name VARCHAR(255),
   email TEXT,
   phone VARCHAR(15) NOT NULL,
-  productivity VARCHAR (10) NOT NULL,
+  productivity VARCHAR (10) ,
   site_id INTEGER REFERENCES site(id),
   job_id INTEGER REFERENCES job(id),
-  project_id INTEGER REFERENCES project(id),
+  project_id INTEGER REFERENCES project(id) default null,
   access_tier role_access_tier DEFAULT 'no_access'
 );
 

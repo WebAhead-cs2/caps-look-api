@@ -12,11 +12,11 @@ const editSite = async (id, site_name, country_name) => {
     [id, site_name, country_name]
   )
 }
-const deleteSite = async (id) => {
-  return await db.query(`DELETE FROM site WHERE id = ($1)`, [id])
+const archiveSite = async (id) => {
+  return await db.query(`update site set isarchived=true WHERE id = ($1)`, [id])
 }
 const getSites = async () => {
   const siteTable = await db.query(`SELECT * FROM site`)
   return siteTable.rows
 }
-module.exports = { createSite, editSite, deleteSite, getSites }
+module.exports = { createSite, editSite, archiveSite, getSites }

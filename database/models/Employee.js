@@ -1,72 +1,80 @@
 const db = require('../connection')
 
-const createEmployee = async (
-  employee_name,
-  id_number,
-  mail,
-  phone,
-  productivety,
-  site_id,
-  job_id,
-  access_tier,
-  project_id
-) => {
-  return await db.query(
-    `INSERT INTO employee (employee_name,
-    id_number,
-    email,
-    phone,
-    productivety,
-    site_id,
-    job_id,
-    access_tier,
-    project_id) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9) RETURNING *`,
-    [
-      employee_name,
-      id_number,
-      mail,
-      phone,
-      productivety,
-      site_id,
-      job_id,
-      access_tier,
-      project_id
-    ]
-  )
-}
+
 const editEmployee = async (
   id,
   employee_name,
   id_number,
-  mail,
+  email,
   phone,
-  productivety,
   site_id,
   job_id,
-  access_tier,
-  project_id
+  access_tier
 ) => {
   return await db.query(
-    `UPDATE employee SET employee_name= ($2),id_number=($3),email=($4),phone=($5),productivety=($6),site_id=($7),job_id=($8),access_tier=($9),project_id=($10) WHERE id = ($1)`,
+    `UPDATE employee SET employee_name= ($2),id_number=($3),email=($4),phone=($5),site_id=($6),job_id=($7),access_tier=($8) WHERE id = ($1)`,
     [
       id,
       employee_name,
       id_number,
-      mail,
+      email,
       phone,
-      productivety,
       site_id,
       job_id,
       access_tier,
-      project_id
     ]
   )
 }
-const deleteEmployee = async (id) => {
-  return await db.query(`DELETE FROM employee WHERE id = ($1)`, [id])
-}
+
 const getEmployees = async () => {
   const employeeTable = await db.query(`SELECT * FROM employee`)
   return employeeTable.rows
 }
-module.exports = { createEmployee, editEmployee, deleteEmployee, getEmployees }
+
+const getEmployeeDetails = async () => {
+  const employeePage = await db.query(`SELECT employee.id,
+  employee.id_number,
+  employee.employee_name,
+  employee.email,
+  employee.phone,
+  employee.productivity,
+  job.job_name,
+  employee.access_tier,
+  project.project_name,
+  scrum.scrum_name,
+  application.application_name,
+  job.id as job_id,
+  employee.site_id as site_id
+  FROM
+  employee
+  inner  JOIN job ON employee.job_id = job.id
+  left  JOIN project ON employee.project_id = project.id 
+  left JOIN employee_scrum ON employee.id = employee_scrum.employee_id
+  left JOIN scrum ON scrum.id = employee_scrum.scrum_id
+  left JOIN application ON application.id = scrum.application_id
+WHERE
+  employee.isarchived = false OR employee.project_id=null `)
+  return employeePage.rows
+}
+
+const addingEmployee = async (
+  Id,
+  employeeName,
+  email,
+  phone,
+  productivety = '',
+  siteId,
+  jobId,
+  accessTier
+) => {
+  return await db.query(
+    `INSERT INTO employee (id_number,employee_name,email,phone,productivity,site_id,job_id,access_tier) VALUES ($1,$2,$3,$4,$5,$6,$7,$8) RETURNING *`,
+    [Id, employeeName, email, phone, productivety, siteId, jobId, accessTier]
+
+  )
+}
+const moveEmployeeToArchive = async (id) => {
+  return await db.query(`Update employee set isarchived=true WHERE id = ($1)`, [id])
+}
+module.exports = { editEmployee, getEmployees, getEmployeeDetails, addingEmployee, moveEmployeeToArchive }
+

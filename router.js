@@ -5,7 +5,9 @@ const loginController = require('./controllers/login.controller')
 const authorizeMiddleware = require('./middleware/authorization')
 const verifyToken = require('./middleware/verifyUser')
 const auth = require('./controllers/auth.controller')
-
+const employeeController = require('./controllers/employee.controller')
+const sitesController = require('./controllers/sites.controller')
+const jobsController=require('./controllers/job.controller')
 router.get('/', generalController.home)
 router.put('/EditProject/:id', projectController.editProjectDetails)
 router.post('/login', loginController)
@@ -53,5 +55,10 @@ router.get(
 )
 
 router.put('/Archive/:id', projectController.moveToArchive)
-
+router.get('/Employee', employeeController.getEmployeesData)
+router.post('/addingEmployee', employeeController.addingEmployeeData)
+router.put('/ArchiveEmployee/:id', employeeController.archiveEmployee)
+router.get('/Sites', sitesController.getSitesName)
+router.get('/Jobs',jobsController.getAllJobs)
+router.put('/editEmployeeDetails/:id',employeeController.editEmployeeDetails)
 module.exports = router
