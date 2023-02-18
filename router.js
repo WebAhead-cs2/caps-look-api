@@ -5,6 +5,7 @@ const siteController = require('./controllers/sites.controller')
 const loginController = require('./controllers/login.controller')
 const authorizeMiddleware = require('./middleware/authorization')
 const verifyToken = require('./middleware/verifyUser')
+const auth = require('./controllers/auth.controller')
 
 router.get('/', generalController.home)
 router.put('/EditProject/:id', projectController.editProjectDetails)
@@ -28,6 +29,9 @@ router.post(
   authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
   projectController.addingProject
 )
+
+router.get('/Logout', auth.logout)
+
 router.get(
   '/GetPlannedSiteMix/:id',
   verifyToken,
@@ -48,6 +52,7 @@ router.get(
   authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
   projectController.getActualSiteMixController
 )
+
 
 router.get(
   '/sites',
@@ -76,4 +81,8 @@ router.post(
   authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
   siteController.deleteSitesController
 )
+
+router.put('/Archive/:id', projectController.moveToArchive)
+
+
 module.exports = router
