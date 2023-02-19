@@ -16,7 +16,9 @@ const deleteSite = async (id) => {
   return await db.query(`DELETE FROM site WHERE id = ($1)`, [id])
 }
 const getSites = async () => {
-  const siteTable = await db.query(`SELECT * FROM site`)
+  const siteTable =
+    await db.query(`SELECT site.id, site.site_name,site.country_name, (SELECT COUNT(*) FROM employee where employee.site_id=site.id) as employee_number FROM
+  site ;`)
   return siteTable.rows
 }
 module.exports = { createSite, editSite, deleteSite, getSites }

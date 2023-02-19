@@ -53,7 +53,6 @@ router.get(
   projectController.getActualSiteMixController
 )
 
-
 router.get(
   '/sites',
   verifyToken,
@@ -83,6 +82,5 @@ router.post(
 )
 
 router.put('/Archive/:id', projectController.moveToArchive)
-
 
 module.exports = router
