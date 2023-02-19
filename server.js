@@ -61,8 +61,6 @@ const limiter = rateLimit({
 })
 app.use(limiter)
 
-app.get('/', limiter, (req, res) => res.send('Hello World!'))
-
 app.use('/', router)
 
 app.use(errorConverter)
