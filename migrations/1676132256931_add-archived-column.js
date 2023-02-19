@@ -9,6 +9,8 @@ exports.up = (pgm) => {
   pgm.addColumns('scrum', { isarchived: { type: 'boolean', default: false } })
   pgm.addColumns('project', { isarchived: { type: 'boolean', default: false } })
   pgm.addColumns('site', { isarchived: { type: 'boolean', default: false } })
+  pgm.addColumns('absence', { isarchived: { type: 'boolean', default: false } })
+
 }
 
 exports.down = (pgm) => {
@@ -16,4 +18,5 @@ exports.down = (pgm) => {
   pgm.dropColumns('scrum', 'isarchived')
   pgm.dropColumns('project', 'isarchived')
   pgm.dropColumns('site', 'isarchived')
+  pgm.dropColumns('absence', 'isarchived')
 }

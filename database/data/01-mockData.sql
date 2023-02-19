@@ -117,21 +117,21 @@ INSERT INTO users (employee_id, email, password) VALUES
 
 -- absence
 INSERT INTO absence (absence_name, site_id, mandatory, absence_start_date, absence_end_date) VALUES
-('Christmas', 1, true,'2023-12-25','2023-12-31'),
-('Christmas', 2, true,'2023-12-25','2023-12-31'),
-('Christmas', 3, false,'2023-12-25','2023-12-31'),
+('Christmas', 1, 'mandatory','2023-12-25','2023-12-31'),
+('Christmas', 2, 'mandatory','2023-12-25','2023-12-31'),
+('Christmas', 3, 'optional','2023-12-25','2023-12-31'),
 
-('Kippur', 1, false,'2023-09-24','2023-09-25'),
-('Kippur', 2, false,'2023-09-24','2023-09-25'),
+('Kippur', 1, 'optional','2023-09-24','2023-09-25'),
+('Kippur', 2, 'optional','2023-09-24','2023-09-25'),
 
-('Easter', 1, true,'2023-04-09','2023-04-16'),
-('Easter', 2, true,'2023-04-09','2023-04-16'),
-('Easter', 3, false,'2023-04-09','2023-04-16'),
+('Easter', 1, 'mandatory','2023-04-09','2023-04-16'),
+('Easter', 2,'mandatory','2023-04-09','2023-04-16'),
+('Easter', 3, 'optional','2023-04-09','2023-04-16'),
 
-('Diwali', 3, true, '2023-11-10','2023-11-14'),
+('Diwali', 3, 'mandatory', '2023-11-10','2023-11-14'),
 
-('Passover', 1, false,'2023-04-09','2023-04-16'),
-('Passover', 2, true,'2023-04-09','2023-04-16');
+('Passover', 1, 'optional','2023-04-09','2023-04-16'),
+('Passover', 2, 'mandatory','2023-04-09','2023-04-16');
 
 
 commit;

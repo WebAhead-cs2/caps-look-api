@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const generalController = require('./controllers/general.controller')
 const projectController = require('./controllers/projects.controller')
+const absenceController = require('./controllers/absences.controller')
 const loginController = require('./controllers/login.controller')
 const authorizeMiddleware = require('./middleware/authorization')
 const verifyToken = require('./middleware/verifyUser')
@@ -53,5 +54,15 @@ router.get(
 )
 
 router.put('/Archive/:id', projectController.moveToArchive)
+
+
+router.get('/absences',absenceController.getAbsencesController)
+
+router.post('/addingAbsence',absenceController.addingAbsence)
+
+router.get('/getAbsenceSites',absenceController.reqAbsenceSites)
+
+router.put('/archiveAbsence/:id',absenceController.archiveAbsence)
+router.put('/EditAbsence/:id', absenceController.editAbsenceDetails)
 
 module.exports = router
