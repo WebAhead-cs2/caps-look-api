@@ -4,15 +4,15 @@ const cors = require('cors')
 const cookieParser = require('cookie-parser')
 const router = require('./router')
 const { errorConverter, errorHandler } = require('./middleware/error')
-const fs = require("fs");
+const fs = require('fs')
 
 const app = express()
 const expressWinston = require('express-winston')
 const { transports, format } = require('winston')
 const logger = require('./logger')
 
-const https = require("https");
-const http = require("http");
+const https = require('https')
+const http = require('http')
 
 // app.use(
 //   expressWinston.logger({
@@ -48,23 +48,18 @@ app.use('/', router)
 app.use(errorConverter)
 app.use(errorHandler)
 
-
-
-http
-  .createServer(app)
-  .listen(process.env.PORT || 4000, function () {
-    console.log('Listening on port http://localhost:4000 !')
-  })
+http.createServer(app).listen(process.env.PORT || 4000, function () {
+  console.log('Listening on port http://localhost:4000 !')
+})
 
 https
   .createServer(
-
     {
-      key: fs.readFileSync("key.pem"),
-      cert: fs.readFileSync("cert.pem"),
+      key: fs.readFileSync('key.pem'),
+      cert: fs.readFileSync('cert.pem')
     },
     app
   )
   .listen(4001, () => {
-    console.log("Https server is runing at port 4001");
-  });
+    console.log('Https server is runing at port 4001')
+  })
