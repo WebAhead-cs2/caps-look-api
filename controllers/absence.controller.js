@@ -28,9 +28,9 @@ const editabsenceController = catchAsync(async (req, res) => {
       successmsg: 'Absence details updated successfully',
       data: data
     })
-  } else if(data){
+  } else if (data) {
     res.status(400).json({
-    msg: 'Invalid input'
+      msg: 'Invalid input'
     })
   } else {
     res.status(500).json({
@@ -47,9 +47,9 @@ const addabsenceController = catchAsync(async (req, res) => {
       successmsg: 'Absence details addeD successfully',
       data: data
     })
-  } else if(data){
+  } else if (data) {
     res.status(400).json({
-    msg: 'Invalid input'
+      msg: 'Invalid input'
     })
   } else {
     res.status(500).json({

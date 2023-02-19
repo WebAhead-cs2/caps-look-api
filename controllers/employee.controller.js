@@ -31,9 +31,9 @@ const editemployeeController = catchAsync(async (req, res) => {
   }
   if (data.length === 0) {
     msg: 'The employee could not be updated'
-  } else if(data){
+  } else if (data) {
     res.status(400).json({
-    msg: 'Invalid input'
+      msg: 'Invalid input'
     })
   } else {
     res.status(500).json({
@@ -49,9 +49,9 @@ const addemployeeCntroller = catchAsync(async (req, res) => {
       successmsg: 'Employee added successfully',
       data: data
     })
-  }else if(data){
+  } else if (data) {
     res.status(400).json({
-    msg: 'Invalid input'
+      msg: 'Invalid input'
     })
   } else {
     res.status(500).json({

@@ -4,7 +4,6 @@ const generalController = require('./controllers/general.controller')
 const absenceController = require('./controllers/absence.controller')
 const employeeController = require('./controllers/employee.controller')
 
-
 router.get('/', generalController.home)
 
 //absence json
@@ -18,7 +17,6 @@ router.get('/getEmployees', employeeController.getEmployeesController)
 router.put('/edit-employee', employeeController.editemployeeController)
 router.post('/add-employee', employeeController.addemployeeCntroller)
 router.delete('/delete-employee', employeeController.deleteemployeeController)
-
 
 // router.get('/ProjectPage', projectscontroller.showProjectsData)
 
