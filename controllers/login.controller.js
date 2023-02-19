@@ -38,7 +38,6 @@ module.exports = async (req, res) => {
       token: token
     })
   } catch (err) {
-    console.log(err.message)
     res.status(500).json({ success: false })
   }
 }
