@@ -55,14 +55,13 @@ router.get(
 
 router.put('/Archive/:id', projectController.moveToArchive)
 
+router.get('/absences', absenceController.getAbsencesController)
 
-router.get('/absences',absenceController.getAbsencesController)
+router.post('/addingAbsence', absenceController.addingAbsence)
 
-router.post('/addingAbsence',absenceController.addingAbsence)
+router.get('/getAbsenceSites', absenceController.reqAbsenceSites)
 
-router.get('/getAbsenceSites',absenceController.reqAbsenceSites)
-
-router.put('/archiveAbsence/:id',absenceController.archiveAbsence)
+router.put('/archiveAbsence/:id', absenceController.archiveAbsence)
 router.put('/EditAbsence/:id', absenceController.editAbsenceDetails)
 
 module.exports = router

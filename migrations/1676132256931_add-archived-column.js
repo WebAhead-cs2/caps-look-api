@@ -10,7 +10,6 @@ exports.up = (pgm) => {
   pgm.addColumns('project', { isarchived: { type: 'boolean', default: false } })
   pgm.addColumns('site', { isarchived: { type: 'boolean', default: false } })
   pgm.addColumns('absence', { isarchived: { type: 'boolean', default: false } })
-
 }
 
 exports.down = (pgm) => {
