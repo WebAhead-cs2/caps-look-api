@@ -80,7 +80,7 @@ CREATE TABLE absence(
   id SERIAL PRIMARY KEY,
   absence_name VARCHAR(255),
   site_id INTEGER REFERENCES site(id),
-  mandatory  VARCHAR(10),
+  mandatory boolean default false,
   absence_start_date DATE,
   absence_end_date DATE
 );

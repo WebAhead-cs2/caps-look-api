@@ -1,5 +1,7 @@
 /* eslint-disable camelcase */
 
+const { dropColumns } = require('node-pg-migrate/dist/operations/tables')
+
 exports.shorthands = undefined
 
 exports.up = (pgm) => {
