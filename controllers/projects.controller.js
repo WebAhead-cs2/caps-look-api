@@ -1,5 +1,5 @@
-const catchAsync = require('../utils/catchAsync')
 const ApiError = require('../utils/ApiError')
+const catchAsync = require('../utils/catchAsync')
 const { createProject } = require('../database/models/Project')
 const {
   getProjects,

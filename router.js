@@ -86,19 +86,17 @@ router.post(
 router.put('/Archive/:id', projectController.moveToArchive)
 
 router.post(
-  '/AddScrum',
-  verifyToken,
-  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
-  scrumsController.addScrum
-)
-
-router.post(
   '/GetScrums',
   verifyToken,
   authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
   scrumsController.getScrumsDetails
 )
-
+router.post(
+  '/AddScrum',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  scrumsController.addScrum
+)
 router.put('/EditScrum/:id', scrumsController.editScrumDetails)
 
 router.put('/ArchiveScrum/:id', scrumsController.ArchiveScrum)

@@ -1,7 +1,7 @@
 const catchAsync = require('../utils/catchAsync')
 const ApiError = require('../utils/ApiError')
-const { getApplicationsByProjectId } = require('../database/models/Application')
 const logger = require('../logger')
+const { getApplicationsByProjectId } = require('../database/models/Application')
 
 const getApplicationController = catchAsync(async (req, res) => {
   const data = await getApplicationsByProjectId(req.body.id)

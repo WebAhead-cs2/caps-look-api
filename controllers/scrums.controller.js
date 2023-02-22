@@ -98,7 +98,7 @@ const ArchiveScrum = async (req, res) => {
 module.exports = {
   getScrumsDetails,
   addScrum,
-  editScrumDetails,
   ArchiveScrum,
+  editScrumDetails,
   getScrumMasterController
 }

@@ -54,17 +54,18 @@ const editScrum = async (
     [id, scrum_name, scrum_master_id, project_id, application_id]
   )
 }
+
+const getScrumsMaster = async () => {
+  return await db.query(
+    `select id,employee_name from employee where access_tier = 'scrum_master' ;`
+  )
+}
+
 const ArchivedScrum = async (id) => {
   return await db.query(
     `
   UPDATE scrum SET isarchived = true where id = ($1)`,
     [id]
-  )
-}
-
-const getScrumsMaster = async () => {
-  return await db.query(
-    `select id,employee_name from employee where access_tier = 'scrum_master' ;`
   )
 }
 

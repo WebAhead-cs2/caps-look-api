@@ -28,8 +28,8 @@ const getApplicationsByProjectId = async (id) => {
   return applicationTable.rows
 }
 module.exports = {
-  createApplication,
   editApplication,
+
   deleteApplication,
   getApplications,
   getApplicationsByProjectId
