@@ -53,15 +53,53 @@ router.get(
   projectController.getActualSiteMixController
 )
 
-router.put('/Archive/:id', projectController.moveToArchive)
+router.put(
+  '/Archive/:id',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  projectController.moveToArchive
+)
 
-router.get('/absences', absenceController.getAbsencesController)
+router.get(
+  '/absences',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  absenceController.getAbsencesController
+)
 
-router.post('/addingAbsence', absenceController.addingAbsence)
+router.post(
+  '/addingAbsence',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  absenceController.addingAbsence
+)
 
-router.get('/getAbsenceSites', absenceController.reqAbsenceSites)
+router.post(
+  '/importAbsence',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  absenceController.importingAbsence
+)
 
-router.put('/archiveAbsence/:id', absenceController.archiveAbsence)
-router.put('/EditAbsence/:id', absenceController.editAbsenceDetails)
+router.get(
+  '/getAbsenceSites',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  absenceController.reqAbsenceSites
+)
+
+router.put(
+  '/archiveAbsence/:id',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  absenceController.archiveAbsence
+)
+
+router.put(
+  '/EditAbsence/:id',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  absenceController.editAbsenceDetails
+)
 
 module.exports = router

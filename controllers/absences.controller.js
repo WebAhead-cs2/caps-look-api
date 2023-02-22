@@ -5,7 +5,8 @@ const {
   archiveSelectedAbsence,
   editAbsence,
   createAbsence,
-  getAbsenceSites
+  getAbsenceSites,
+  importingAbsences
 } = require('../database/models/Absence')
 
 const logger = require('../logger')
@@ -33,6 +34,31 @@ const addingAbsence = catchAsync(async (req, res) => {
     new Date(req.body.startDate),
     new Date(req.body.endDate)
   )
+  // logger.info(
+  //   `the data ${req.body.absence_name}, ${req.body.site_id}, ${req.body.absence_start_date}, ${req.body.absence_end_date}, ${req.body.mandatory} inserted successfully`
+  // )
+  if (addedData) {
+    res.status(200).json({
+      message: 'create Absence is done successfully',
+      data: addedData
+    })
+  } else {
+    res.status(200).json({
+      message: 'Adding Absence is failed'
+    })
+  }
+})
+const importingAbsence = catchAsync(async (req, res) => {
+  // const addedData = await importAbsence(
+  //   req.body.absenceName,
+  //   req.body.siteId,
+  //   req.body.mandatory,
+  //   new Date(req.body.startDate),
+  //   new Date(req.body.endDate)
+  // )
+
+  const addedData = importingAbsences(req.body)
+  console.log(req.body)
   // logger.info(
   //   `the data ${req.body.absence_name}, ${req.body.site_id}, ${req.body.absence_start_date}, ${req.body.absence_end_date}, ${req.body.mandatory} inserted successfully`
   // )
@@ -109,5 +135,6 @@ module.exports = {
   addingAbsence,
   reqAbsenceSites,
   archiveAbsence,
-  editAbsenceDetails
+  editAbsenceDetails,
+  importingAbsence
 }

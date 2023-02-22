@@ -49,11 +49,48 @@ const getAbsenceSites = async () => {
   const absencesSites = await db.query(`SELECT * FROM site`)
   return absencesSites
 }
+const convertDdmmyyyyToMmddyyyy = (dateString) => {
+  
+  let d = dateString.split('/')
+  let dat = new Date(d[2] + '/' + d[1] + '/' + d[0])
+  return dat
+}
+
+const importingAbsences = (list) => {
+  list.map(async (item) => {
+    if (!item || !item.absence_start_date || !item.absence_end_date) return
+
+    console.log(item)
+    item.absence_start_date = new Date(
+      convertDdmmyyyyToMmddyyyy(item.absence_start_date)
+    )
+    item.absence_end_date = new Date(
+      convertDdmmyyyyToMmddyyyy(item.absence_end_date)
+    )
+    console.log(item)
+
+    return await db.query(
+      `INSERT INTO absence (absence_name, 
+      site_id,
+      mandatory,
+      absence_start_date,
+      absence_end_date) VALUES ($1,$2,$3,$4,$5) RETURNING *`,
+      [
+        item.absence_name,
+        item.site_id,
+        item.mandatory,
+        item.absence_start_date,
+        item.absence_end_date
+      ]
+    )
+  })
+}
 
 module.exports = {
   createAbsence,
   editAbsence,
   archiveSelectedAbsence,
   getAbsences,
-  getAbsenceSites
+  getAbsenceSites,
+  importingAbsences
 }
