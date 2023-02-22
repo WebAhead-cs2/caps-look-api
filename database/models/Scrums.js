@@ -64,7 +64,7 @@ const ArchivedScrum = async (id) => {
 
 const getScrumsMaster = async () => {
   return await db.query(
-    `select id,employee_name from employee where access_tier = 'scrum_master';`
+    `select id,employee_name from employee where access_tier = 'scrum_master' ;`
   )
 }
 

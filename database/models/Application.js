@@ -8,7 +8,7 @@ const createApplication = async (application_name, project_id) => {
 }
 const editApplication = async (id, application_name, project_id) => {
   return await db.query(
-    `UPDATE application SET application_name= ($2),project_id=($3) WHERE id = ($1)`,
+    `UPDATE application SET application_name= ($2),project_id=($3) WHERE id = ($1) `,
     [id, application_name, project_id]
   )
 }

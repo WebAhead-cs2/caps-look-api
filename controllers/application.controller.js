@@ -12,7 +12,7 @@ const getApplicationController = catchAsync(async (req, res) => {
     })
   } else {
     res.status(200).json({
-      message: 'no projects found',
+      message: 'no projects found !',
       data: ''
     })
   }

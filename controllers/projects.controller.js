@@ -167,7 +167,7 @@ const addingProject = catchAsync(async (req, res) => {
     })
   } else {
     res.status(200).json({
-      message: 'Adding project is failed'
+      message: 'Adding project is failed !'
     })
   }
 })

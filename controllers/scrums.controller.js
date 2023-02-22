@@ -13,7 +13,7 @@ const getScrumsDetails = catchAsync(async (req, res) => {
   const data = await getScrums(req.body.id)
   if (data) {
     res.status(200).json({
-      message: 'Scrums retrieved successfully!',
+      message: 'Scrums retrieved successfully !',
       data: data
     })
   } else {
