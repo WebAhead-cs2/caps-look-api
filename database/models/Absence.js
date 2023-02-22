@@ -50,7 +50,6 @@ const getAbsenceSites = async () => {
   return absencesSites
 }
 const convertDdmmyyyyToMmddyyyy = (dateString) => {
-  
   let d = dateString.split('/')
   let dat = new Date(d[2] + '/' + d[1] + '/' + d[0])
   return dat
