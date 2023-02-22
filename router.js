@@ -3,6 +3,8 @@ const generalController = require('./controllers/general.controller')
 const projectController = require('./controllers/projects.controller')
 const siteController = require('./controllers/sites.controller')
 const loginController = require('./controllers/login.controller')
+const scrumsController = require('./controllers/scrums.controller')
+const applicationController = require('./controllers/application.controller')
 const authorizeMiddleware = require('./middleware/authorization')
 const verifyToken = require('./middleware/verifyUser')
 const auth = require('./controllers/auth.controller')
@@ -82,5 +84,37 @@ router.post(
 )
 
 router.put('/Archive/:id', projectController.moveToArchive)
+
+router.post(
+  '/GetScrums',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  scrumsController.getScrumsDetails
+)
+
+router.post(
+  '/AddScrum',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  scrumsController.addScrum
+)
+
+router.put('/EditScrum/:id', scrumsController.editScrumDetails)
+
+router.put('/ArchiveScrum/:id', scrumsController.ArchiveScrum)
+
+router.get(
+  '/GetScrumMaster',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  scrumsController.getScrumMasterController
+)
+
+router.post(
+  '/GetApplicationName',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  applicationController.getApplicationController
+)
 
 module.exports = router

@@ -19,9 +19,18 @@ const getApplications = async () => {
   const applicationTable = await db.query(`SELECT * FROM application`)
   return applicationTable.rows
 }
+
+const getApplicationsByProjectId = async (id) => {
+  const applicationTable = await db.query(
+    `SELECT * FROM application where project_id=($1)`,
+    [id]
+  )
+  return applicationTable.rows
+}
 module.exports = {
   createApplication,
   editApplication,
   deleteApplication,
-  getApplications
+  getApplications,
+  getApplicationsByProjectId
 }
