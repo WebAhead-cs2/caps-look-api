@@ -1,5 +1,5 @@
-const catchAsync = require('../utils/catchAsync')
 const ApiError = require('../utils/ApiError')
+const catchAsync = require('../utils/catchAsync')
 const { createProject } = require('../database/models/Project')
 const {
   getProjects,
@@ -167,7 +167,7 @@ const addingProject = catchAsync(async (req, res) => {
     })
   } else {
     res.status(200).json({
-      message: 'Adding project is failed'
+      message: 'Adding project is failed !'
     })
   }
 })
