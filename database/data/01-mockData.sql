@@ -133,5 +133,4 @@ INSERT INTO absence (absence_name, site_id, mandatory, absence_start_date, absen
 ('Passover', 1, 'optional','2023-04-09','2023-04-16'),
 ('Passover', 2, 'mandatory','2023-04-09','2023-04-16');
 
-
 commit;
