@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const generalController = require('./controllers/general.controller')
 const projectController = require('./controllers/projects.controller')
+const absenceController = require('./controllers/absences.controller')
 const siteController = require('./controllers/sites.controller')
 const loginController = require('./controllers/login.controller')
 const authorizeMiddleware = require('./middleware/authorization')
@@ -81,6 +82,53 @@ router.post(
   siteController.deleteSitesController
 )
 
-router.put('/Archive/:id', projectController.moveToArchive)
+router.put(
+  '/Archive/:id',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  projectController.moveToArchive
+)
+
+router.get(
+  '/absences',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  absenceController.getAbsencesController
+)
+
+router.post(
+  '/addingAbsence',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  absenceController.addingAbsence
+)
+
+router.post(
+  '/importAbsence',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  absenceController.importingAbsence
+)
+
+router.get(
+  '/getAbsenceSites',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  absenceController.reqAbsenceSites
+)
+
+router.put(
+  '/archiveAbsence/:id',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  absenceController.archiveAbsence
+)
+
+router.put(
+  '/EditAbsence/:id',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  absenceController.editAbsenceDetails
+)
 
 module.exports = router

@@ -151,7 +151,7 @@ const addingProject = catchAsync(async (req, res) => {
     })
   } else if (req.body.PiNumber < 1 || req.body.PiNumber >= 100) {
     res.status(200).json({
-      message: 'PI should be a number between 1 and 99 letters'
+      message: 'PI should be a number between 1 and 99'
     })
   } else if (req.body.PiNumber.includes('.')) {
     res.status(200).json({
