@@ -83,8 +83,6 @@ router.post(
   siteController.creatSiteDetails
 )
 
-
-
 router.put(
   '/archiveSite/:id',
   verifyToken,

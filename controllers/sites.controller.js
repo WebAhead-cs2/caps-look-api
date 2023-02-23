@@ -63,7 +63,6 @@ const editSiteDetails = catchAsync(async (req, res) => {
 })
 
 const archiveSitesController = catchAsync(async (req, res) => {
-
   const data = await archiveSite(req.params.id)
   if (data) {
     res.status(200).json({
@@ -99,5 +98,4 @@ module.exports = {
   archiveSitesController,
   creatSiteDetails,
   getSitesName
-
 }

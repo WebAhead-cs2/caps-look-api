@@ -13,7 +13,6 @@ const editSite = async (id, site_name, country_name) => {
   )
 }
 const archiveSite = async (id) => {
-
   return await db.query(`update site set isarchived=true WHERE id = ($1)`, [id])
 }
 const getSitesDetails = async () => {
@@ -21,13 +20,16 @@ const getSitesDetails = async () => {
     await db.query(`SELECT site.id, site.site_name,site.country_name, (SELECT COUNT(*) FROM employee where employee.site_id=site.id) as employee_number FROM
   site `)
   return siteTable.rows
-
 }
 const getSites = async () => {
-  const siteTable =
-    await db.query(`SELECT * from site`)
+  const siteTable = await db.query(`SELECT * from site`)
   return siteTable.rows
 }
 
-
-module.exports = { createSite, editSite, archiveSite, getSites, getSitesDetails }
+module.exports = {
+  createSite,
+  editSite,
+  archiveSite,
+  getSites,
+  getSitesDetails
+}
