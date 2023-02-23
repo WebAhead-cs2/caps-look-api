@@ -9,12 +9,19 @@ const applicationController = require('./controllers/application.controller')
 const authorizeMiddleware = require('./middleware/authorization')
 const verifyToken = require('./middleware/verifyUser')
 const auth = require('./controllers/auth.controller')
+const employeeController = require('./controllers/employee.controller')
+const jobController = require('./controllers/job.controller')
 const homecontroller = require('./controllers/home.controller')
 
 router.get('/', generalController.home)
 router.put('/EditProject/:id', projectController.editProjectDetails)
 router.post('/login', loginController)
-
+router.get('/Employee', employeeController.getEmployeesData)
+router.post('/addingEmployee', employeeController.addingEmployeeData)
+router.put('/ArchiveEmployee/:id', employeeController.archiveEmployee)
+router.get('/Sites', siteController.getSitesName)
+router.get('/Jobs', jobController.getAllJobs)
+router.put('/editEmployeeDetails/:id', employeeController.editEmployeeDetails)
 router.get(
   '/projects',
   verifyToken,
@@ -195,5 +202,7 @@ router.post(
   authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
   applicationController.getApplicationController
 )
+
+router.post('/importEmployees', employeeController.importingEmployees)
 
 module.exports = router

@@ -1,14 +1,24 @@
-//// site controller///
-
 const catchAsync = require('../utils/catchAsync')
 const ApiError = require('../utils/ApiError')
-const logger = require('../logger')
+
 const {
+  getSites,
+  getSitesDetails,
   createSite,
   editSite,
   archiveSite,
   getSites
 } = require('../database/models/Site')
+
+const getSitesName = catchAsync(async (req, res) => {
+  const data = await getSites()
+  if (data) {
+    res.status(200).json({
+      message: 'sites retrieved successfully',
+      data: data
+    })
+  }
+})
 
 const creatSiteDetails = catchAsync(async (req, res) => {
   const data = await createSite(req.body.site_name, req.body.country_name)
@@ -68,7 +78,7 @@ const archiveSitesController = catchAsync(async (req, res) => {
 })
 
 const getSitesController = catchAsync(async (req, res) => {
-  const data = await getSites()
+  const data = await getSitesDetails()
   if (data) {
     res.status(200).json({
       message: 'Sites retrieved successfully!',
@@ -76,7 +86,7 @@ const getSitesController = catchAsync(async (req, res) => {
     })
   } else {
     res.status(200).json({
-      message: 'no Sites found',
+      message: 'no sites found',
       data: ''
     })
   }
@@ -86,5 +96,6 @@ module.exports = {
   getSitesController,
   editSiteDetails,
   archiveSitesController,
-  creatSiteDetails
+  creatSiteDetails,
+  getSitesName
 }

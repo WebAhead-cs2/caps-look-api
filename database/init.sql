@@ -1,8 +1,9 @@
+
 BEGIN;
 
 DROP TABLE IF EXISTS job, site,  application, iteration, milestone, scrum, employee,
 employee_scrum, absence, employee_absence, users,project, pgmigrations  CASCADE;
-DROP TYPE IF EXISTS role_access_tier CASCADE;
+DROP TYPE IF EXISTS role_access_tier,cost_level_enum CASCADE;
 
 CREATE TABLE job (
    id SERIAL PRIMARY KEY,
@@ -58,7 +59,7 @@ CREATE TABLE employee (
   productivity VARCHAR (10) NOT NULL,
   site_id INTEGER REFERENCES site(id),
   job_id INTEGER REFERENCES job(id),
-  project_id INTEGER REFERENCES project(id),
+  project_id INTEGER REFERENCES project(id) default null,
   access_tier role_access_tier DEFAULT 'no_access'
 );
 
