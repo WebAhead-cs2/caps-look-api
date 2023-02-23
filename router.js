@@ -11,6 +11,8 @@ const verifyToken = require('./middleware/verifyUser')
 const auth = require('./controllers/auth.controller')
 const employeeController = require('./controllers/employee.controller')
 const jobController = require('./controllers/job.controller')
+const homecontroller = require('./controllers/home.controller')
+
 router.get('/', generalController.home)
 router.put('/EditProject/:id', projectController.editProjectDetails)
 router.post('/login', loginController)
@@ -60,6 +62,38 @@ router.get(
   verifyToken,
   authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
   projectController.getActualSiteMixController
+)
+
+router.get(
+  '/home/projectStartDay/:id',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  homecontroller.getStartDayController
+)
+router.get(
+  '/home/projectCountEmployees/:id',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  homecontroller.getCountEmployeesControllers
+)
+
+router.get(
+  '/home/projectCountIterations/:id',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  homecontroller.getCountIterationsController
+)
+router.get(
+  '/home/projectCountScrums/:id',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  homecontroller.getCountScrumsController
+)
+router.get(
+  '/home/projectCountSites/:id',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  homecontroller.getCountSitesController
 )
 
 router.get(
@@ -170,7 +204,5 @@ router.post(
 )
 
 router.post('/importEmployees', employeeController.importingEmployees)
-
-router.get('/SitesDetails', siteController.getSitesController)
 
 module.exports = router
