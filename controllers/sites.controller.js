@@ -6,14 +6,14 @@ const logger = require('../logger')
 const {
   createSite,
   editSite,
-  deleteSite,
+  archiveSite,
   getSites
 } = require('../database/models/Site')
 
 const creatSiteDetails = catchAsync(async (req, res) => {
-  const data = await createSite(req.body.SiteName, req.body.countryName)
+  const data = await createSite(req.body.site_name, req.body.country_name)
   logger.info(
-    `the site name ${req.body.SiteName},${req.body.countryName},  created successfully`
+    `the site name ${req.body.site_name},${req.body.country_name},  created successfully`
   )
 
   if (data) {
@@ -31,12 +31,12 @@ const creatSiteDetails = catchAsync(async (req, res) => {
 
 const editSiteDetails = catchAsync(async (req, res) => {
   const data = await editSite(
-    req.body.id,
-    req.body.SiteName,
-    req.body.countryName
+    req.params.id,
+    req.body.site_name,
+    req.body.country_name
   )
   logger.info(
-    `the data ${req.body.SiteName},${req.body.countryName},${req.body.id},  edited successfully`
+    `the data ${req.body.site_name},${req.body.country_name},${req.params.id},  edited successfully`
   )
 
   if (data) {
@@ -52,8 +52,8 @@ const editSiteDetails = catchAsync(async (req, res) => {
   }
 })
 
-const deleteSitesController = catchAsync(async (req, res) => {
-  const data = await deleteSite(req.body.id)
+const archiveSitesController = catchAsync(async (req, res) => {
+  const data = await archiveSite(req.params.id)
   if (data) {
     res.status(200).json({
       message: 'Sites deleted successfully!',
@@ -85,6 +85,6 @@ const getSitesController = catchAsync(async (req, res) => {
 module.exports = {
   getSitesController,
   editSiteDetails,
-  deleteSitesController,
+  archiveSitesController,
   creatSiteDetails
 }
