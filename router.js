@@ -1,17 +1,25 @@
 const router = require('express').Router()
 const generalController = require('./controllers/general.controller')
 const projectController = require('./controllers/projects.controller')
+const absenceController = require('./controllers/absences.controller')
+const siteController = require('./controllers/sites.controller')
 const loginController = require('./controllers/login.controller')
+const scrumsController = require('./controllers/scrums.controller')
+const applicationController = require('./controllers/application.controller')
 const authorizeMiddleware = require('./middleware/authorization')
 const verifyToken = require('./middleware/verifyUser')
 const auth = require('./controllers/auth.controller')
 const employeeController = require('./controllers/employee.controller')
-const sitesController = require('./controllers/sites.controller')
-const jobsController = require('./controllers/job.controller')
+const jobController = require('./controllers/job.controller')
 router.get('/', generalController.home)
 router.put('/EditProject/:id', projectController.editProjectDetails)
 router.post('/login', loginController)
-
+router.get('/Employee', employeeController.getEmployeesData)
+router.post('/addingEmployee', employeeController.addingEmployeeData)
+router.put('/ArchiveEmployee/:id', employeeController.archiveEmployee)
+router.get('/Sites', siteController.getSitesName)
+router.get('/Jobs', jobController.getAllJobs)
+router.put('/editEmployeeDetails/:id', employeeController.editEmployeeDetails)
 router.get(
   '/projects',
   verifyToken,
@@ -54,11 +62,113 @@ router.get(
   projectController.getActualSiteMixController
 )
 
-router.put('/Archive/:id', projectController.moveToArchive)
-router.get('/Employee', employeeController.getEmployeesData)
-router.post('/addingEmployee', employeeController.addingEmployeeData)
-router.put('/ArchiveEmployee/:id', employeeController.archiveEmployee)
-router.get('/Sites', sitesController.getSitesName)
-router.get('/Jobs', jobsController.getAllJobs)
-router.put('/editEmployeeDetails/:id', employeeController.editEmployeeDetails)
+router.get(
+  '/sites',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  siteController.getSitesController
+)
+
+router.put(
+  '/editsite',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  siteController.editSiteDetails
+)
+
+router.post(
+  '/createsite',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  siteController.creatSiteDetails
+)
+
+router.post(
+  '/archiveSite',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  siteController.archiveSitesController
+)
+
+router.put(
+  '/Archive/:id',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  projectController.moveToArchive
+)
+
+router.get(
+  '/absences',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  absenceController.getAbsencesController
+)
+
+router.post(
+  '/addingAbsence',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  absenceController.addingAbsence
+)
+
+router.post(
+  '/importAbsence',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  absenceController.importingAbsence
+)
+
+router.get(
+  '/getAbsenceSites',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  absenceController.reqAbsenceSites
+)
+
+router.put(
+  '/archiveAbsence/:id',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  absenceController.archiveAbsence
+)
+
+router.put(
+  '/EditAbsence/:id',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  absenceController.editAbsenceDetails
+)
+
+router.post(
+  '/GetScrums',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  scrumsController.getScrumsDetails
+)
+router.post(
+  '/AddScrum',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  scrumsController.addScrum
+)
+router.put('/EditScrum/:id', scrumsController.editScrumDetails)
+
+router.put('/ArchiveScrum/:id', scrumsController.ArchiveScrum)
+
+router.get(
+  '/GetScrumMaster',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  scrumsController.getScrumMasterController
+)
+
+router.post(
+  '/GetApplicationName',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  applicationController.getApplicationController
+)
+
+router.post('/importEmployees', employeeController.importingEmployees)
+
 module.exports = router

@@ -1,8 +1,9 @@
+
 BEGIN;
 
 DROP TABLE IF EXISTS job, site,  application, iteration, milestone, scrum, employee,
 employee_scrum, absence, employee_absence, users,project, pgmigrations  CASCADE;
-DROP TYPE IF EXISTS role_access_tier CASCADE;
+DROP TYPE IF EXISTS role_access_tier,cost_level_enum CASCADE;
 
 CREATE TABLE job (
    id SERIAL PRIMARY KEY,
@@ -55,7 +56,7 @@ CREATE TABLE employee (
   employee_name VARCHAR(255),
   email TEXT,
   phone VARCHAR(15) NOT NULL,
-  productivity VARCHAR (10) ,
+  productivity VARCHAR (10) NOT NULL,
   site_id INTEGER REFERENCES site(id),
   job_id INTEGER REFERENCES job(id),
   project_id INTEGER REFERENCES project(id) default null,
@@ -80,7 +81,7 @@ CREATE TABLE absence(
   id SERIAL PRIMARY KEY,
   absence_name VARCHAR(255),
   site_id INTEGER REFERENCES site(id),
-  mandatory  boolean default false,
+  mandatory boolean default false,
   absence_start_date DATE,
   absence_end_date DATE
 );
@@ -99,7 +100,6 @@ CREATE TABLE users(
 );
 
 commit;
-
 
 
 

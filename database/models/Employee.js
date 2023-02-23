@@ -52,7 +52,7 @@ const addingEmployee = async (
   employeeName,
   email,
   phone,
-  productivety = '',
+  productivety = 'NA',
   siteId,
   jobId,
   accessTier
@@ -67,10 +67,29 @@ const moveEmployeeToArchive = async (id) => {
     id
   ])
 }
+const importEmployee = async (list) => {
+  list.map(async (item) => {
+    return await db.query(
+      `INSERT INTO employee (
+      id_number,employee_name,email,phone,productivity,site_id,job_id,access_tier) VALUES ($1,$2,$3,$4,$5,$6,$7,$8) RETURNING *`,
+      [
+        item.id_number,
+        item.employee_name,
+        item.email,
+        item.phone,
+        item.productivity,
+        item.site_id,
+        item.job_id,
+        item.access_tier
+      ]
+    )
+  })
+}
 module.exports = {
   editEmployee,
   getEmployees,
   getEmployeeDetails,
   addingEmployee,
-  moveEmployeeToArchive
+  moveEmployeeToArchive,
+  importEmployee
 }

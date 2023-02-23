@@ -4,8 +4,10 @@ const {
   getEmployeeDetails,
   addingEmployee,
   moveEmployeeToArchive,
-  editEmployee
+  editEmployee,
+  importEmployee
 } = require('../database/models/Employee')
+const { requestWhitelist } = require('express-winston')
 
 const getEmployeesData = catchAsync(async (req, res) => {
   console.log(2)
@@ -28,7 +30,7 @@ const addingEmployeeData = catchAsync(async (req, res) => {
     req.body.employeeName,
     req.body.email,
     req.body.phone,
-    '',
+    'NA',
     req.body.siteId,
     req.body.jobId,
     req.body.accessTier
@@ -59,14 +61,7 @@ const archiveEmployee = async (req, res) => {
     })
   }
 }
-// id,
-//   employee_name,
-//   id_number,
-//   email,
-//   phone,
-//   site_id,
-//   job_id,
-//   access_tier
+
 const editEmployeeDetails = async (req, res) => {
   const data = await editEmployee(
     req.params.id,
@@ -90,9 +85,24 @@ const editEmployeeDetails = async (req, res) => {
     })
   }
 }
+const importingEmployees = catchAsync(async (req, res) => {
+  const data = importEmployee(req.body)
+  if (data) {
+    res.status(200).json({
+      message: 'import employee data  done successfully',
+      data: data
+    })
+  } else {
+    res.status(200).json({
+      message: 'import employee data failed',
+      data: ''
+    })
+  }
+})
 module.exports = {
   getEmployeesData,
   addingEmployeeData,
   archiveEmployee,
-  editEmployeeDetails
+  editEmployeeDetails,
+  importingEmployees
 }

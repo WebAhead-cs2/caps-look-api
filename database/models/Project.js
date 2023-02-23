@@ -25,8 +25,9 @@ const editProject = async (
 }
 
 const getProjects = async () => {
-  const projectTable = await db.query(`SELECT * FROM project`)
-
+  const projectTable = await db.query(
+    `SELECT * FROM project order by project_name asc`
+  )
   return Promise.resolve(projectTable.rows)
 }
 
@@ -59,7 +60,7 @@ const updateProjectSiteMix = async ({ projectId, planMix }) => {
 
 const getActualSiteMix = async (projectId) => {
   const sitemix = await db.query(
-    `SELECT site.site_name, COUNT(employee.id_number) AS dedicated_ee FROM EMPLOYEE  INNER JOIN site ON employee.site_id=site.id WHERE employee.project_id=$1 GROUP BY site.site_name;`,
+    `SELECT site.cost_level, COUNT(employee.id_number) AS site_ee FROM EMPLOYEE  INNER JOIN site ON employee.site_id=site.id WHERE employee.project_id=$1 GROUP BY site.cost_level`,
     [projectId]
   )
   return sitemix.rows
