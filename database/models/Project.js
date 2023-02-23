@@ -25,8 +25,9 @@ const editProject = async (
 }
 
 const getProjects = async () => {
-  const projectTable = await db.query(`SELECT * FROM project`)
-
+  const projectTable = await db.query(
+    `SELECT * FROM project order by project_name asc`
+  )
   return Promise.resolve(projectTable.rows)
 }
 
