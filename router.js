@@ -70,7 +70,7 @@ router.get(
 )
 
 router.put(
-  '/editsite',
+  '/editsite/:id',
   verifyToken,
   authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
   siteController.editSiteDetails
@@ -83,8 +83,10 @@ router.post(
   siteController.creatSiteDetails
 )
 
-router.post(
-  '/archiveSite',
+
+
+router.put(
+  '/archiveSite/:id',
   verifyToken,
   authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
   siteController.archiveSitesController
@@ -170,5 +172,7 @@ router.post(
 )
 
 router.post('/importEmployees', employeeController.importingEmployees)
+
+router.get('/SitesDetails', siteController.getSitesController)
 
 module.exports = router
