@@ -1,7 +1,7 @@
 {
   "name": "caps-lock-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "### Installation steps:",
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
@@ -28,6 +28,7 @@
   "homepage": "https://github.com/WebAhead-cs2/caps-lock-api#readme",
   "dependencies": {
     "bcrypt": "^5.1.0",
+    "commander": "^10.0.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
@@ -36,10 +37,14 @@
     "express-winston": "^4.2.0",
     "helmet": "^6.0.1",
     "http-status": "^1.6.2",
+    "inquirer": "^8.2.5",
     "jsonwebtoken": "^9.0.0",
     "node-cache": "^5.1.2",
     "node-pg-migrate": "^6.2.2",
     "pg": "^8.9.0",
+    "prompt": "^1.3.0",
+    "prompt-sync": "^4.2.0",
+    "prompts": "^2.4.2",
     "winston": "^3.8.2"
   },
   "devDependencies": {
