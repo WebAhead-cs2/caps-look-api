@@ -1,7 +1,7 @@
 
 BEGIN;
 
-DROP TABLE IF EXISTS job, site,  application, iteration, milestone, scrum, employee,
+DROP TABLE IF EXISTS job, site,  application, iteration,pi, milestone, scrum, employee,
 employee_scrum, absence, employee_absence, users,project, pgmigrations  CASCADE;
 DROP TYPE IF EXISTS role_access_tier,cost_level_enum CASCADE;
 
@@ -24,21 +24,29 @@ CREATE TABLE project (
    project_iterations_count INTEGER
    
 );
-
+CREATE TABLE pi (
+   id SERIAL PRIMARY KEY,
+   pi_name VARCHAR(255),
+   project_id INTEGER REFERENCES project(id)
+   
+);
 CREATE TABLE iteration (
    id SERIAL PRIMARY KEY,
    iteration_name VARCHAR(255),
    project_id INTEGER REFERENCES project(id),
+   pi_id INTEGER REFERENCES pi(id),
    iteration_number INTEGER,
    iteration_start_date DATE,
    iteration_end_date DATE
 );
 
+
 CREATE TABLE milestone (
    id SERIAL PRIMARY KEY,
    milestone_name VARCHAR(255),
    project_id INTEGER REFERENCES project(id),
-   milestone_date DATE,
+   milestone_start_date DATE,
+   milestone_end_date DATE,
    description TEXT
 );
 
