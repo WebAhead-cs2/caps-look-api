@@ -2,19 +2,19 @@ BEGIN;
 --site
 INSERT INTO site (site_name, country_name) VALUES ('Nazareth','israel'),('Rannana','israel'),('Pune','india');
 --project
-INSERT INTO project (project_name,planned_site_mix,start_date, project_iterations_count) VALUES
-('VR','{"Nazareth":"10","Pune":"5"}','2021-08-17',2),('SES','{"Nazareth":"12","Rannana":"2"}','2021-05-10',2),
-('ARM','{"Rannana":"4","Pune":"10"}','2022-03-25',2),('OPTIMA','{"Nazareth":"15","Pune":"6"}','2022-07-27',1);
+INSERT INTO project (project_name,planned_site_mix,start_date,project_pis_count) VALUES
+('VR','{"Nazareth":"10","Pune":"5"}','2021-08-17',4),('SES','{"Nazareth":"12","Rannana":"2"}','2021-05-10',4),
+('ARM','{"Rannana":"4","Pune":"10"}','2022-03-25',4),('OPTIMA','{"Nazareth":"15","Pune":"6"}','2022-07-27',4);
 --application
 INSERT INTO application (application_name, project_id) VALUES
 ('OMS',1),('ODB',1),('T1',3),('V3',3),('OSO',2),('ODO',2),('PLTD',4);
 
 --PI
-INSERT INTO pi (pi_name, project_id) VALUES 
-('PI-11',1),('PI-12',1),('PI-13',1),('PI-14',1),
-('PI-21',2),('PI-22',2),('PI-23',2),('PI-24',2),
-('PI-31',3),('PI-32',3),('PI-33',3),('PI-34',3),
-('PI-41',4),('PI-42',4),('PI-43',4),('PI-44',4);
+INSERT INTO pi (pi_name, project_id,project_iterations_count) VALUES 
+('PI-11',1,3),('PI-12',1,2),('PI-13',1,2),('PI-14',1,1),
+('PI-21',2,2),('PI-22',2,2),('PI-23',2,2),('PI-24',2,2),
+('PI-31',3,2),('PI-32',3,2),('PI-33',3,2),('PI-34',3,3),
+('PI-41',4,3),('PI-42',4,3),('PI-43',4,3),('PI-44',4,3);
 
 
 --iteration

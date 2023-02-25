@@ -8,6 +8,10 @@ const createIteration = async (
   iteration_start_date,
   iteration_end_date
 ) => {
+  await db.query(
+    'UPDATE pi SET project_iterations_count = COALESCE(project_iterations_count,0) + 1 WHERE id=($1)',
+    [pi_id]
+  )
   return await db.query(
     `INSERT INTO iteration (iteration_name,project_id,pi_id, iteration_number,
       iteration_start_date,

@@ -21,13 +21,14 @@ CREATE TABLE project (
    project_name VARCHAR(255),
    planned_site_mix jsonb,
    start_date DATE,
-   project_iterations_count INTEGER
+   project_pis_count INTEGER DEFAULT 0
    
 );
 CREATE TABLE pi (
    id SERIAL PRIMARY KEY,
    pi_name VARCHAR(255),
-   project_id INTEGER REFERENCES project(id)
+   project_id INTEGER REFERENCES project(id),
+   project_iterations_count INTEGER DEFAULT 0
    
 );
 CREATE TABLE iteration (

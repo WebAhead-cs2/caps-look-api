@@ -1,6 +1,10 @@
 const db = require('../connection')
 
 const createPi = async (pi_name, project_id) => {
+  await db.query(
+    'UPDATE project SET project_pis_count = COALESCE(project_pis_count,0) + 1 WHERE id=($1)',
+    [project_id]
+  )
   return await db.query(
     `INSERT INTO pi (pi_name,project_id) VALUES ($1,$2) RETURNING *`,
     [pi_name, project_id]
