@@ -18,11 +18,12 @@ const archiveSite = async (id) => {
 const getSitesDetails = async () => {
   const siteTable =
     await db.query(`SELECT site.id, site.site_name,site.country_name, (SELECT COUNT(*) FROM employee where employee.site_id=site.id) as employee_number FROM
-  site `)
+  site where isarchived=false`)
   return siteTable.rows
 }
 const getSites = async () => {
   const siteTable = await db.query(`SELECT * from site`)
+
   return siteTable.rows
 }
 
