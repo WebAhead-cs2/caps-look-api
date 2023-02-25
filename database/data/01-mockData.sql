@@ -8,41 +8,27 @@ INSERT INTO project (project_name,planned_site_mix,start_date, project_iteration
 --application
 INSERT INTO application (application_name, project_id) VALUES
 ('OMS',1),('ODB',1),('T1',3),('V3',3),('OSO',2),('ODO',2),('PLTD',4);
+
+--PI
+INSERT INTO pi (pi_name, project_id) VALUES 
+('PI-1',1);
+
+
 --iteration
-INSERT INTO iteration (iteration_name, project_id, iteration_number, iteration_start_date, iteration_end_date) VALUES
-('iteration-27',1,1,'2021-08-17','2021-09-06'),('iteration-27',1,2,'2021-09-07','2021-09-13'),
-('iteration-28',1,1,'2021-09-14','2021-10-04');
-INSERT INTO iteration (iteration_name, project_id, iteration_number, iteration_start_date, iteration_end_date) VALUES
-('iteration-20',2,1,'2021-05-10','2021-05-17'),('iteration-20',2,2,'2021-05-18','2021-06-07'),
-('iteration-20',2,3,'2021-06-08','2021-07-01'),('iteration-21',2,1,'2021-07-02','2021-07-15');
-INSERT INTO iteration (iteration_name, project_id, iteration_number, iteration_start_date, iteration_end_date) VALUES
- ('iteration-25',3,1,'2022-03-25','2022-04-08'),('iteration-25',3,2,'2022-04-09','2022-05-01'),
-('iteration-26',3,1,'2022-05-20','2021-06-25'),('iteration-26',3,2,'2022-06-26','2022-07-20');
-INSERT INTO iteration (iteration_name, project_id, iteration_number, iteration_start_date, iteration_end_date) VALUES
- ('iteration-30',4,1,'2022-07-27','2022-08-15'),('iteration-30',4,2,'2022-08-16','2022-09-01');
+INSERT INTO iteration (iteration_name, project_id, pi_id, iteration_number, iteration_start_date, iteration_end_date) VALUES 
+('iteration-27',1,1,1,'2021-08-17','2021-09-06'),('iteration-27',1,1,2,'2021-09-07','2021-09-13'), 
+('iteration-28',1,1,1,'2021-09-14','2021-10-04');
+
 --milestone
-INSERT INTO milestone (milestone_name, project_id, milestone_date, description) VALUES
-('pi27-deployment',1,'2021-08-17','the deployment of pi 27'),
-('pi27-release',1,'2021-09-06','the first version release'),
-('pi27-cut-off',1,'2021-09-13','the cut-off of pi 27'),
-('pi28-deployment',1,'2021-09-14','the deployment of pi 27'),
-('pi28-features',1,'2021-09-26','adding some features'),
-('pi28-cut-off',1,'2021-10-04','the cut-off of pi 28'),
-('pi20-deployment',2,'2021-05-10','the deployment of pi 20'),
-('pi20-release',2,'2021-05-20','the first version release'),
-('pi20-cut-off',2,'2021-07-01','the cut-off of pi 20'),
-('pi21-deployment',2,'2021-07-02','the deployment of pi 21'),
-('pi21-features',2,'2021-07-10','adding some features'),
-('pi21-cut-off',2,'2021-07-15','the cut-off of pi 21'),
-('pi25-deployment',3,'2022-03-25','the deployment of pi 25'),
-('pi25-release',3,'2022-04-15','the first version release'),
-('pi25-cut-off',3,'2022-05-01','the cut-off of pi 25'),
-('pi26-deployment',3,'2022-05-20','the deployment of pi 26'),
-('pi26-features',3,'2022-06-30','adding some features'),
-('pi26-cut-off',3,'2022-07-20','the cut-off of pi 26'),
-('pi30-deployment',4,'2022-07-27','the deployment of pi 30'),
-('pi30-release',4,'2022-08-20','the first version release'),
-('pi30-cut-off',4,'2022-09-01','the cut-off of pi 30');
+INSERT INTO milestone (milestone_name, project_id, milestone_start_date,milestone_end_date, description) VALUES 
+('pi27-deployment',1,'2021-08-17','2021-08-27','the deployment of pi 27'),
+('pi27-release',1,'2021-09-06','2021-09-16','the first version release'),
+('pi27-cut-off',1,'2021-09-13','2021-09-23','the cut-off of pi 27'),
+('pi28-deployment',1,'2021-09-14','2021-09-24','the deployment of pi 27'),
+('pi28-features',1,'2021-09-26','2021-09-30','adding some features'),
+('pi28-cut-off',1,'2021-10-04','2021-10-14','the cut-off of pi 28');
+
+
 --job
 INSERT INTO job (job_name) VALUES ('scrum master'),('developer'),('scrum tester'),('manager'),('architect'),('specialist');
 --employees
