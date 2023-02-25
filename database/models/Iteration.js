@@ -49,9 +49,30 @@ const getIterations = async () => {
   const iterationTable = await db.query(`SELECT * FROM iteration`)
   return iterationTable.rows
 }
+const getProjectIterations = async (ProjectId) => {
+  const iterationTable = await db.query(
+    `SELECT * FROM iteration where project_id = ($1)`,
+    [ProjectId]
+  )
+  return iterationTable.rows
+}
+// const getIterationsDates = async (ProjectId) => {
+//   const data = await db.query(
+//     `SELECT iteration_start_date , iteration_end_date FROM iteration where project_id = ($1) `,
+//     [ProjectId]
+//   )
+//   const iterationTable = data.rows.map((iteration) => ({
+//     startDate: iteration.iteration_start_date,
+//     endDate: iteration.iteration_end_date
+//   }))
+//   return iterationTable
+// }
+
 module.exports = {
   createIteration,
   editIteration,
   deleteIteration,
-  getIterations
+  getIterations,
+  getProjectIterations
+  // getIterationsDates
 }
