@@ -1,12 +1,12 @@
 const catchAsync = require('../utils/catchAsync')
 const ApiError = require('../utils/ApiError')
+const logger = require('../logger')
 
 const {
   getSitesDetails,
   createSite,
   editSite,
-  archiveSite,
-  getSites
+  archiveSite
 } = require('../database/models/Site')
 
 const getSitesName = catchAsync(async (req, res) => {

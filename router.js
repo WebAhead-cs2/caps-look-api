@@ -100,7 +100,7 @@ router.get(
 )
 
 router.get(
-  '/sites',
+  '/sitesDetails',
   verifyToken,
   authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
   siteController.getSitesController
