@@ -2,8 +2,8 @@
 BEGIN;
 
 DROP TABLE IF EXISTS job, site,  application, iteration,pi, milestone, scrum, employee,
-employee_scrum, absence, employee_absence, users,project, pgmigrations  CASCADE;
-DROP TYPE IF EXISTS role_access_tier,cost_level_enum CASCADE;
+employee_scrum, absence, employee_absence, users,project, pgmigrations,absence_types  CASCADE;
+DROP TYPE IF EXISTS role_access_tier,cost_level_enum,weekend CASCADE;
 
 CREATE TABLE job (
    id SERIAL PRIMARY KEY,
@@ -58,6 +58,8 @@ CREATE TABLE application(
 
 CREATE TYPE role_access_tier AS ENUM('scrum_master','project_manager','resource_manager','no_access');
 
+CREATE TYPE weekend AS ENUM('FS', 'SS');
+
 CREATE TABLE employee (
   id SERIAL PRIMARY KEY,
   id_number VARCHAR(50),
@@ -68,6 +70,7 @@ CREATE TABLE employee (
   site_id INTEGER REFERENCES site(id),
   job_id INTEGER REFERENCES job(id),
   project_id INTEGER REFERENCES project(id) default null,
+  weekend_days weekend DEFAULT 'FS',
   access_tier role_access_tier DEFAULT 'no_access'
 );
 
@@ -85,6 +88,10 @@ CREATE TABLE employee_scrum(
     scrum_id INTEGER REFERENCES scrum(id)
 );
 
+CREATE TABLE absence_types(
+  id SERIAL PRIMARY KEY,
+  absence_type VARCHAR(255)
+);
 CREATE TABLE absence(
   id SERIAL PRIMARY KEY,
   absence_name VARCHAR(255),
@@ -93,11 +100,14 @@ CREATE TABLE absence(
   absence_start_date DATE,
   absence_end_date DATE
 );
-
 CREATE TABLE employee_absence(
   id SERIAL PRIMARY KEY,
   employee_id INTEGER REFERENCES employee(id),
-  absence json NOT NULL    --[["absence":"cause"],["absence":"cause"],["absence":"cause"]]
+  absence_type_id INTEGER REFERENCES absence_types(id),
+  absence_id INTEGER REFERENCES absence(id),
+  absence_type_start_date DATE,
+  absence_type_end_date DATE,
+  cause VARCHAR(255)
 );
 
 CREATE TABLE users(

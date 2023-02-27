@@ -6,6 +6,7 @@ const siteController = require('./controllers/sites.controller')
 const loginController = require('./controllers/login.controller')
 const scrumsController = require('./controllers/scrums.controller')
 const applicationController = require('./controllers/application.controller')
+const capacityController = require('./controllers/capacity.controller')
 const authorizeMiddleware = require('./middleware/authorization')
 const verifyToken = require('./middleware/verifyUser')
 const auth = require('./controllers/auth.controller')
@@ -301,6 +302,51 @@ router.put(
   verifyToken,
   authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
   milestoneController.archiveMilestonesController
+)
+
+router.post(
+  '/GetpiDate',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  capacityController.getIterationsData
+)
+
+router.post(
+  '/Getpis',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  capacityController.getPis
+)
+
+router.post(
+  '/GetItration',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  capacityController.getItrations
+)
+
+router.post(
+  '/getScrumCapacityPerIterations',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  capacityController.getScrumCapacityPerIterations
+)
+
+router.post(
+  '/getIterationByPi',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  capacityController.getIterationByPi
+)
+
+router.post(
+  '/getScrumAvailablity',
+  capacityController.getEmployeeAvailablityController
+)
+
+router.post(
+  '/getEmployeeAbsence',
+  capacityController.getEmployeeAbsencesController
 )
 
 module.exports = router
