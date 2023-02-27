@@ -36,4 +36,5 @@ const getCapacitys = async () => {
   const capacityTable = await db.query(`SELECT * FROM capacity`)
   return capacityTable.rows
 }
+
 module.exports = { createCapacity, editCapacity, deleteCapacity, getCapacitys }
