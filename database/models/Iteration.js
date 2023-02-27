@@ -49,9 +49,18 @@ const getIterations = async () => {
   const iterationTable = await db.query(`SELECT * FROM iteration`)
   return iterationTable.rows
 }
+const getProjectIterations = async (ProjectId) => {
+  const iterationTable = await db.query(
+    `SELECT * FROM iteration where project_id = ($1)`,
+    [ProjectId]
+  )
+  return iterationTable.rows
+}
+
 module.exports = {
   createIteration,
   editIteration,
   deleteIteration,
-  getIterations
+  getIterations,
+  getProjectIterations
 }
