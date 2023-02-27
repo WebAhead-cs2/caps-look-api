@@ -12,7 +12,12 @@ const auth = require('./controllers/auth.controller')
 const employeeController = require('./controllers/employee.controller')
 const jobController = require('./controllers/job.controller')
 const homecontroller = require('./controllers/home.controller')
+
+const iterationController = require('./controllers/iteration.controller')
+const piController = require('./controllers/pi.controller')
+const milestoneController = require('./controllers/milestone.controller')
 const capacityController = require('./controllers/capacity.controller')
+
 router.get('/', generalController.home)
 router.put('/EditProject/:id', projectController.editProjectDetails)
 router.post('/login', loginController)
@@ -212,5 +217,100 @@ router.post(
 )
 
 router.post('/importEmployees', employeeController.importingEmployees)
+
+router.get(
+  '/pis',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  piController.getPisController
+)
+router.post(
+  '/pisProject',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  piController.getPisProjectDetails
+)
+router.put(
+  '/editPi/:id',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  piController.editPiDetails
+)
+router.post(
+  '/createPi',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  piController.createPiDetails
+)
+
+router.put(
+  '/archivePi/:id',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  piController.archivePisController
+)
+router.get(
+  '/iterations',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  iterationController.getIterationsController
+)
+router.post(
+  '/iterationsPi',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  iterationController.getiterationsPiController
+)
+router.put(
+  '/editIteration/:id',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  iterationController.editIterationDetails
+)
+
+router.post(
+  '/createIteration',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  iterationController.creatIterationDetails
+)
+
+router.put(
+  '/archiveIteration/:id',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  iterationController.archiveIterationsController
+)
+router.get(
+  '/milestones',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  milestoneController.getMilestonesController
+)
+router.post(
+  '/milestoneProject',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  milestoneController.getMilestonesProjectDetails
+)
+router.put(
+  '/editMilestone/:id',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  milestoneController.editMilestoneDetails
+)
+router.post(
+  '/createMilestone',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  milestoneController.createMilestoneDetails
+)
+
+router.put(
+  '/archiveMilestone/:id',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  milestoneController.archiveMilestonesController
+)
 
 module.exports = router
