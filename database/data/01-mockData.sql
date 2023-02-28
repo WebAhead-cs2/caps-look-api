@@ -111,10 +111,11 @@ INSERT INTO employee (id_number, employee_name, email, phone, productivity, site
 ('383216', 'Naim', 'naim@gmail.com','0501234567', '90', 1,5,4,'no_access'),
 ('976431', 'abdalla', 'abdalla@gmail.com','0501234567', '90', 1,3,4,'no_access'),
 ('000000', 'Khalid', 'khalid@gmail.com','0501234567', '0', 3,1,null,'resource_manager'),
-('111111', 'Sally', 'sally@gmail.com','0501234567', '0', 3,1,null,'project_manager');
+('111111', 'Sally', 'sally@gmail.com','0501234567', '0', 3,1,null,'project_manager'),
+('909090', 'ragab', 'ragab@gmail.com','0501234559', '90', 1,1,3,'scrum_master');
 --scrum
 INSERT INTO scrum (scrum_name, scrum_master_id, project_id, application_id) VALUES
-('Agno', 1, 1, 1),('sky', 15,2,5),('Panay', 8,3,3),('Jalapeos', 22,4,7);
+('Agno', 1, 1, 1),('sky', 15,2,5),('Panay', 8,3,3),('Ploto', 31,3,3),('Jalapeos', 22,4,7);
 --employee_scrum
 INSERT INTO employee_scrum (employee_id, scrum_id) VALUES
 (1,1),(2,1),(3,1),(4,1),(5,1),(6,1),(7,1),
