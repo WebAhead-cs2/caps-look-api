@@ -3,23 +3,17 @@ const db = require('../connection')
 const createIteration = async (
   iteration_name,
   project_id,
-  pi_id,
   iteration_number,
   iteration_start_date,
   iteration_end_date
 ) => {
-  await db.query(
-    'UPDATE pi SET project_iterations_count = COALESCE(project_iterations_count,0) + 1 WHERE id=($1)',
-    [pi_id]
-  )
   return await db.query(
-    `INSERT INTO iteration (iteration_name,project_id,pi_id, iteration_number,
+    `INSERT INTO iteration (iteration_name,project_id, iteration_number,
       iteration_start_date,
-      iteration_end_date) VALUES ($1,$2,$3,$4,$5,$6) RETURNING *`,
+      iteration_end_date) VALUES ($1,$2,$3,$4,$5) RETURNING *`,
     [
       iteration_name,
       project_id,
-      pi_id,
       iteration_number,
       iteration_start_date,
       iteration_end_date
@@ -30,52 +24,43 @@ const editIteration = async (
   id,
   iteration_name,
   project_id,
-  pi_id,
   iteration_number,
   iteration_start_date,
   iteration_end_date
 ) => {
   return await db.query(
-    `UPDATE iteration SET iteration_name= ($2),project_id=($3) ,pi_id=($4),iteration_number=($5),
-  iteration_start_date=($6),
-  iteration_end_date=($7) WHERE id = ($1)`,
+    `UPDATE iteration SET iteration_name= ($2),project_id=($3) ,iteration_number=($4),
+  iteration_start_date=($5),
+  iteration_end_date=($6) WHERE id = ($1)`,
     [
       id,
       iteration_name,
       project_id,
-      pi_id,
       iteration_number,
       iteration_start_date,
       iteration_end_date
     ]
   )
 }
-const archiveIteration = async (id) => {
-  return await db.query(
-    `UPDATE iteration SET isarchived=true WHERE id = ($1)`,
-    [id]
-  )
+const deleteIteration = async (id) => {
+  return await db.query(`DELETE FROM iteration WHERE id = ($1)`, [id])
 }
 const getIterations = async () => {
   const iterationTable = await db.query(`SELECT * FROM iteration`)
   return iterationTable.rows
 }
-
-const getIterationspi = async (pi_id) => {
-  const iterationPiTable = await db.query(
-    `SELECT * FROM iteration WHERE pi_id=($1) AND isarchived=false`,
-    [pi_id]
+const getProjectIterations = async (ProjectId) => {
+  const iterationTable = await db.query(
+    `SELECT * FROM iteration where project_id = ($1)`,
+    [ProjectId]
   )
-  return iterationPiTable.rows
+  return iterationTable.rows
 }
 
 module.exports = {
   createIteration,
   editIteration,
-  archiveIteration,
-  getIterations,
   deleteIteration,
-  getProjectIterations,
-  getIterationspi
-
+  getIterations,
+  getProjectIterations
 }

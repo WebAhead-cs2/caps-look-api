@@ -2,7 +2,7 @@
 BEGIN;
 
 DROP TABLE IF EXISTS job, site,  application, iteration, milestone, scrum, employee,
-employee_scrum, absence, employee_absence, users,project,pi, pgmigrations  CASCADE;
+employee_scrum, absence, employee_absence, users,project, pgmigrations  CASCADE;
 DROP TYPE IF EXISTS role_access_tier,cost_level_enum CASCADE;
 
 CREATE TABLE job (
@@ -100,6 +100,7 @@ CREATE TABLE users(
 );
 
 commit;
+
 
 
 
