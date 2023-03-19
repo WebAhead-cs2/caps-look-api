@@ -10,7 +10,6 @@ const {
 const { requestWhitelist } = require('express-winston')
 
 const getEmployeesData = catchAsync(async (req, res) => {
-  console.log(2)
   const data = await getEmployeeDetails()
   if (data) {
     res.status(200).json({

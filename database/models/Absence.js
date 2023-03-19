@@ -59,15 +59,12 @@ const importingAbsences = (list) => {
   list.map(async (item) => {
     if (!item || !item.absence_start_date || !item.absence_end_date) return
 
-    console.log(item)
     item.absence_start_date = new Date(
       convertDdmmyyyyToMmddyyyy(item.absence_start_date)
     )
     item.absence_end_date = new Date(
       convertDdmmyyyyToMmddyyyy(item.absence_end_date)
     )
-    console.log(item)
-
     return await db.query(
       `INSERT INTO absence (absence_name, 
       site_id,

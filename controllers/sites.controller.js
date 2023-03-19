@@ -1,8 +1,8 @@
 const catchAsync = require('../utils/catchAsync')
 const ApiError = require('../utils/ApiError')
+const logger = require('../logger')
 
 const {
-  getSites,
   getSitesDetails,
   createSite,
   editSite,

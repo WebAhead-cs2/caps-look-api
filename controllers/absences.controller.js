@@ -50,7 +50,6 @@ const addingAbsence = catchAsync(async (req, res) => {
 })
 const importingAbsence = catchAsync(async (req, res) => {
   const addedData = importingAbsences(req.body)
-  console.log(req.body)
   logger.info(
     `the data ${req.body.absence_name}, ${req.body.site_id}, ${req.body.absence_start_date}, ${req.body.absence_end_date}, ${req.body.mandatory} inserted successfully`
   )

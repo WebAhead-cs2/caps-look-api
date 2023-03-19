@@ -8,41 +8,76 @@ INSERT INTO project (project_name,planned_site_mix,start_date, project_iteration
 --application
 INSERT INTO application (application_name, project_id) VALUES
 ('OMS',1),('ODB',1),('T1',3),('V3',3),('OSO',2),('ODO',2),('PLTD',4);
+
+--PI
+INSERT INTO pi (pi_name, project_id) VALUES 
+('PI-1',1),('PI-2',1),('PI-3',1),('PI-4',1);
+INSERT INTO pi (pi_name, project_id) VALUES 
+('PI-1',2),('PI-2',2),('PI-3',2),('PI-4',2),('PI-5',2);
+INSERT INTO pi (pi_name, project_id) VALUES 
+('PI-1',3),('PI-2',3),('PI-3',3),('PI-4',3),('PI-5',3),('PI-6',3);
+INSERT INTO pi (pi_name, project_id) VALUES 
+('PI-1',4),('PI-2',4);
+
 --iteration
-INSERT INTO iteration (iteration_name, project_id, iteration_number, iteration_start_date, iteration_end_date) VALUES
-('iteration-27',1,1,'2021-08-17','2021-09-06'),('iteration-27',1,2,'2021-09-07','2021-09-13'),
-('iteration-28',1,1,'2021-09-14','2021-10-04');
-INSERT INTO iteration (iteration_name, project_id, iteration_number, iteration_start_date, iteration_end_date) VALUES
-('iteration-20',2,1,'2021-05-10','2021-05-17'),('iteration-20',2,2,'2021-05-18','2021-06-07'),
-('iteration-20',2,3,'2021-06-08','2021-07-01'),('iteration-21',2,1,'2021-07-02','2021-07-15');
-INSERT INTO iteration (iteration_name, project_id, iteration_number, iteration_start_date, iteration_end_date) VALUES
- ('iteration-25',3,1,'2022-03-25','2022-04-08'),('iteration-25',3,2,'2022-04-09','2022-05-01'),
-('iteration-26',3,1,'2022-05-20','2021-06-25'),('iteration-26',3,2,'2022-06-26','2022-07-20');
-INSERT INTO iteration (iteration_name, project_id, iteration_number, iteration_start_date, iteration_end_date) VALUES
- ('iteration-30',4,1,'2022-07-27','2022-08-15'),('iteration-30',4,2,'2022-08-16','2022-09-01');
+INSERT INTO iteration (iteration_name, project_id, pi_id, iteration_number, iteration_start_date, iteration_end_date) VALUES 
+('iteration-1',1,1,1,'2021-08-17','2021-09-06'),('iteration-1',1,1,2,'2021-09-07','2021-09-15'), 
+('iteration-2',1,2,1,'2021-09-16','2021-10-04'),('iteration-2',1,2,2,'2021-10-05','2021-10-20');
+
+INSERT INTO iteration (iteration_name, project_id, pi_id, iteration_number, iteration_start_date, iteration_end_date) VALUES 
+('iteration-3',1,3,1,'2021-10-21','2021-11-01'),('iteration-3',1,3,2,'2021-11-02','2021-11-17'), 
+('iteration-3',1,3,3,'2021-11-18','2021-11-28'),('iteration-4',1,4,1,'2021-11-29','2021-12-07');
+
+INSERT INTO iteration (iteration_name, project_id, pi_id, iteration_number, iteration_start_date, iteration_end_date) VALUES 
+('iteration-4',1,4,2,'2021-12-19','2021-12-30'),('iteration-4',1,4,3,'2021-12-31','2022-01-10'), 
+('iteration-4',1,4,4,'2022-01-11','2022-01-21'),('iteration-4',1,4,5,'2022-01-22','2022-02-01');
+--==========================================================
+INSERT INTO iteration (iteration_name, project_id, pi_id, iteration_number, iteration_start_date, iteration_end_date) VALUES 
+('iteration-1',2,5,1,'2021-08-17','2021-09-06'),('iteration-1',2,5,2,'2021-09-07','2021-09-15'), 
+('iteration-1',2,5,3,'2021-09-16','2021-10-04'),('iteration-2',2,6,1,'2021-10-05','2021-10-20');
+
+INSERT INTO iteration (iteration_name, project_id, pi_id, iteration_number, iteration_start_date, iteration_end_date) VALUES
+('iteration-2',2,6,2,'2021-10-21','2021-11-01'),('iteration-3',2,7,1,'2021-11-02','2021-11-17'),
+('iteration-3',1,7,2,'2021-11-18','2021-11-28'),('iteration-3',1,7,3,'2021-11-29','2021-12-07');
+
+INSERT INTO iteration (iteration_name, project_id, pi_id, iteration_number, iteration_start_date, iteration_end_date) VALUES
+('iteration-4',2,8,1,'2021-12-19','2021-12-30'),('iteration-4',2,8,2,'2021-12-31','2022-01-10'),
+('iteration-5',2,9,1,'2022-01-11','2022-01-21'),('iteration-5',2,9,2,'2022-01-22','2022-02-01');
+--==========================================================
+INSERT INTO iteration (iteration_name, project_id, pi_id, iteration_number, iteration_start_date, iteration_end_date) VALUES
+('iteration-1',3,10,1,'2022-03-25','2022-04-08'),('iteration-1',3,10,2,'2022-04-09','2022-05-01'),
+('iteration-2',3,11,1,'2022-05-02','2022-06-25'),('iteration-2',3,11,2,'2022-06-26','2022-07-20');
+
+INSERT INTO iteration (iteration_name, project_id, pi_id, iteration_number, iteration_start_date, iteration_end_date) VALUES
+('iteration-2',3,11,3,'2022-07-21','2022-07-31'),('iteration-3',3,12,1,'2022-08-01','2022-08-10'),
+('iteration-3',3,12,2,'2022-08-11','2022-08-27'),('iteration-3',3,12,3,'2022-08-28','2022-09-11');
+
+INSERT INTO iteration (iteration_name, project_id, pi_id, iteration_number, iteration_start_date, iteration_end_date) VALUES
+('iteration-4',3,13,1,'2022-09-12','2022-09-22'),('iteration-4',3,13,2,'2022-09-30','2022-10-11'),
+('iteration-4',3,13,3,'2022-10-12','2022-10-23'),('iteration-5',3,14,1,'2022-10-24','2022-11-02');
+
+INSERT INTO iteration (iteration_name, project_id, pi_id, iteration_number, iteration_start_date, iteration_end_date) VALUES
+('iteration-5',3,14,2,'2022-11-03','2022-11-11'),('iteration-5',3,14,3,'2022-11-25','2022-12-01'),
+('iteration-6',3,15,1,'2022-12-02','2022-12-13'),('iteration-6',3,15,2,'2022-12-14','2022-12-31');
+--==========================================================
+INSERT INTO iteration (iteration_name, project_id, pi_id, iteration_number, iteration_start_date, iteration_end_date) VALUES
+('iteration-1',4,16,1,'2022-03-25','2022-04-08'),('iteration-1',4,16,2,'2022-04-09','2022-05-01'),
+('iteration-1',4,16,3,'2022-05-20','2022-06-25'),('iteration-1',4,16,4,'2022-06-26','2022-07-20');
+
+INSERT INTO iteration (iteration_name, project_id, pi_id, iteration_number, iteration_start_date, iteration_end_date) VALUES
+('iteration-2',4,17,1,'2022-07-21','2022-07-31'),('iteration-2',4,17,2,'2022-08-01','2022-08-10'),
+('iteration-2',4,17,3,'2022-08-11','2022-08-27'),('iteration-2',4,17,4,'2022-08-28','2022-09-11');
+
 --milestone
-INSERT INTO milestone (milestone_name, project_id, milestone_date, description) VALUES
-('pi27-deployment',1,'2021-08-17','the deployment of pi 27'),
-('pi27-release',1,'2021-09-06','the first version release'),
-('pi27-cut-off',1,'2021-09-13','the cut-off of pi 27'),
-('pi28-deployment',1,'2021-09-14','the deployment of pi 27'),
-('pi28-features',1,'2021-09-26','adding some features'),
-('pi28-cut-off',1,'2021-10-04','the cut-off of pi 28'),
-('pi20-deployment',2,'2021-05-10','the deployment of pi 20'),
-('pi20-release',2,'2021-05-20','the first version release'),
-('pi20-cut-off',2,'2021-07-01','the cut-off of pi 20'),
-('pi21-deployment',2,'2021-07-02','the deployment of pi 21'),
-('pi21-features',2,'2021-07-10','adding some features'),
-('pi21-cut-off',2,'2021-07-15','the cut-off of pi 21'),
-('pi25-deployment',3,'2022-03-25','the deployment of pi 25'),
-('pi25-release',3,'2022-04-15','the first version release'),
-('pi25-cut-off',3,'2022-05-01','the cut-off of pi 25'),
-('pi26-deployment',3,'2022-05-20','the deployment of pi 26'),
-('pi26-features',3,'2022-06-30','adding some features'),
-('pi26-cut-off',3,'2022-07-20','the cut-off of pi 26'),
-('pi30-deployment',4,'2022-07-27','the deployment of pi 30'),
-('pi30-release',4,'2022-08-20','the first version release'),
-('pi30-cut-off',4,'2022-09-01','the cut-off of pi 30');
+INSERT INTO milestone (milestone_name, project_id, milestone_start_date,milestone_end_date, description) VALUES 
+('pi27-deployment',1,'2021-08-17','2021-08-27','the deployment of pi 27'),
+('pi27-release',1,'2021-09-06','2021-09-16','the first version release'),
+('pi27-cut-off',1,'2021-09-13','2021-09-23','the cut-off of pi 27'),
+('pi28-deployment',1,'2021-09-14','2021-09-24','the deployment of pi 27'),
+('pi28-features',1,'2021-09-26','2021-09-30','adding some features'),
+('pi28-cut-off',1,'2021-10-04','2021-10-14','the cut-off of pi 28');
+
+
 --job
 INSERT INTO job (job_name) VALUES ('scrum master'),('developer'),('scrum tester'),('manager'),('architect'),('specialist');
 --employees
@@ -76,10 +111,11 @@ INSERT INTO employee (id_number, employee_name, email, phone, productivity, site
 ('383216', 'Naim', 'naim@gmail.com','0501234567', '90', 1,5,4,'no_access'),
 ('976431', 'abdalla', 'abdalla@gmail.com','0501234567', '90', 1,3,4,'no_access'),
 ('000000', 'Khalid', 'khalid@gmail.com','0501234567', '0', 3,1,null,'resource_manager'),
-('111111', 'Sally', 'sally@gmail.com','0501234567', '0', 3,1,null,'project_manager');
+('111111', 'Sally', 'sally@gmail.com','0501234567', '0', 3,1,null,'project_manager'),
+('909090', 'ragab', 'ragab@gmail.com','0501234559', '90', 1,1,3,'scrum_master');
 --scrum
 INSERT INTO scrum (scrum_name, scrum_master_id, project_id, application_id) VALUES
-('Agno', 1, 1, 1),('sky', 15,2,5),('Panay', 8,3,3),('Jalapeos', 22,4,7);
+('Agno', 1, 1, 1),('sky', 15,2,5),('Panay', 8,3,3),('Ploto', 31,3,3),('Jalapeos', 22,4,7);
 --employee_scrum
 INSERT INTO employee_scrum (employee_id, scrum_id) VALUES
 (1,1),(2,1),(3,1),(4,1),(5,1),(6,1),(7,1),
@@ -96,15 +132,34 @@ INSERT INTO users (employee_id, email, password) VALUES
 (30, 'sally@gmail.com', '$2b$10$w.bzMY3RLihEHB.Xm9KdHedzp1dONPQcrJtdm3XmKjZbt4WVusHZe');    --password: "sally"
 -- absence
 INSERT INTO absence (absence_name, site_id, mandatory, absence_start_date, absence_end_date) VALUES
-('Christmas', 1, 'mandatory','2023-12-25','2023-12-31'),
-('Christmas', 2, 'mandatory','2023-12-25','2023-12-31'),
-('Christmas', 3, 'optional','2023-12-25','2023-12-31'),
-('Kippur', 1, 'optional','2023-09-24','2023-09-25'),
-('Kippur', 2, 'optional','2023-09-24','2023-09-25'),
-('Easter', 1, 'mandatory','2023-04-09','2023-04-16'),
-('Easter', 2,'mandatory','2023-04-09','2023-04-16'),
-('Easter', 3, 'optional','2023-04-09','2023-04-16'),
-('Diwali', 3, 'mandatory', '2023-11-10','2023-11-14'),
-('Passover', 1, 'optional','2023-04-09','2023-04-16'),
-('Passover', 2, 'mandatory','2023-04-09','2023-04-16');
+('Christmas', 1, 'mandatory','2022-12-25','2022-12-31'),
+('Christmas', 2, 'mandatory','2022-12-25','2022-12-31'),
+('Christmas', 3, 'optional','2022-12-25','2022-12-31'),
+('Kippur', 1, 'optional','2022-09-24','2022-09-25'),
+('Kippur', 2, 'optional','2022-09-24','2022-09-25'),
+('Easter', 1, 'mandatory','2022-04-01','2022-04-05'),
+('Easter', 2,'mandatory','2022-04-01','2022-04-05'),
+('Easter', 3, 'optional','2022-04-01','2022-04-05'),
+('Diwali', 3, 'mandatory', '2022-11-10','2022-11-14'),
+('Passover', 1, 'optional','2022-04-09','2022-04-16'),
+('Passover', 2, 'mandatory','2022-04-09','2022-04-16');
+
+INSERT INTO absence_types (absence_type) VALUES ('T'),('SL'),('CL'),('AD'),('V');
+INSERT INTO employee_absence (
+  employee_id,
+  absence_type_id,
+  absence_id,
+  absence_type_start_date,
+  absence_type_end_date,
+  cause
+) VALUES
+  (1, 1, 1, '2022-01-01', '2022-01-05', 'Sick leave'),
+  (2, 3, 2, '2022-02-01', '2022-02-02', 'Vacation'),
+  (3, 2, 3, '2022-03-01', '2022-03-03', 'Personal leave'),
+  (5, 5, 5, '2022-05-01', '2022-05-05', 'Absence due to death in family'),
+  (1, 2, 1, '2022-01-01', '2022-01-05', 'Sick leave'),
+  (2, 1, 2, '2022-02-01', '2022-02-02', 'Vacation'),
+  (3, 4, 3, '2022-03-01', '2022-03-03', 'Personal leave'),
+  (5, 2, 5, '2022-05-01', '2022-05-05', 'Absence due to death in family');
+
 commit;
