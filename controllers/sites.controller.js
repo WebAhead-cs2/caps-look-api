@@ -6,8 +6,7 @@ const {
   getSitesDetails,
   createSite,
   editSite,
-  archiveSite,
-  getSites
+  archiveSite
 } = require('../database/models/Site')
 
 const getSitesName = catchAsync(async (req, res) => {

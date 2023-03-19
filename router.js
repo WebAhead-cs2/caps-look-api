@@ -17,7 +17,6 @@ const homecontroller = require('./controllers/home.controller')
 const iterationController = require('./controllers/iteration.controller')
 const piController = require('./controllers/pi.controller')
 const milestoneController = require('./controllers/milestone.controller')
-
 router.get('/', generalController.home)
 router.put('/EditProject/:id', projectController.editProjectDetails)
 router.post('/login', loginController)
@@ -27,6 +26,14 @@ router.put('/ArchiveEmployee/:id', employeeController.archiveEmployee)
 router.get('/Sites', siteController.getSitesName)
 router.get('/Jobs', jobController.getAllJobs)
 router.put('/editEmployeeDetails/:id', employeeController.editEmployeeDetails)
+
+router.post(
+  '/pi',
+  verifyToken,
+  authorizeMiddleware(['scrum_master', 'project_manager', 'resource_manager']),
+  capacityController.getIterationsData
+)
+
 router.get(
   '/projects',
   verifyToken,
