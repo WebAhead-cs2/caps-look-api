@@ -1,5 +1,3 @@
-//// Milestone controller///
-
 const catchAsync = require('../utils/catchAsync')
 const logger = require('../logger')
 const {

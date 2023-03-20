@@ -4,7 +4,6 @@ const home = catchAsync((req, res) => {
   res.send('Hello, World!')
 })
 
-// this is an example of how to use the ApiError class
 const errorExample = catchAsync((req, res) => {
   throw new ApiError(500, 'Eshi enfajar')
 })
