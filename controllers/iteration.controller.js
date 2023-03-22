@@ -5,8 +5,7 @@ const {
   createIteration,
   editIteration,
   archiveIteration,
-  getIterations,
-  getIterationspi
+  getIterations
 } = require('../database/models/Iteration')
 
 const creatIterationDetails = catchAsync(async (req, res) => {

@@ -1,7 +1,6 @@
 const catchAsync = require('../utils/catchAsync')
 const ApiError = require('../utils/ApiError')
 const { getProjectPis } = require('../database/models/Iteration')
-const { getIterationspi } = require('../database/models/Iteration')
 const {
   getScrumCapacityPerIterationsQuery
 } = require('../database/models/Capacity')
