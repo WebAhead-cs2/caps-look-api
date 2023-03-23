@@ -1,11 +1,4 @@
 const db = require('../connection')
-const getProjectSiteMix = async (projectId) => {
-  const sitemix = await db.query(
-    `SELECT planned_site_mix FROM project WHERE id=$1`,
-    [projectId]
-  )
-  return sitemix.rows
-}
 
 const startDay = async (projectId) => {
   const projectdate = await db.query(

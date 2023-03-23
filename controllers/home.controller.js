@@ -1,6 +1,5 @@
 const db = require('../database/connection')
 const catchAsync = require('../utils/catchAsync')
-//const ApiError = require('../utils/ApiError');
 
 const {
   count_iterations,

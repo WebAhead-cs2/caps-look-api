@@ -1,14 +1,9 @@
 const db = require('../connection')
 
-const createProject = async (
-  project_name,
-  start_date,
-  project_iterations_count,
-  plannedMix = {}
-) => {
+const createProject = async (project_name, start_date) => {
   return await db.query(
-    `INSERT INTO project (project_name,planned_site_mix,start_date,project_iterations_count) VALUES ($1,$2,$3,$4) RETURNING *`,
-    [project_name, plannedMix, start_date, project_iterations_count]
+    `INSERT INTO project (project_name,start_date) VALUES ($1,$2) RETURNING *`,
+    [project_name, start_date]
   )
 }
 const editProject = async (

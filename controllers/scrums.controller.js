@@ -40,8 +40,6 @@ const getScrumMasterController = catchAsync(async (req, res) => {
 })
 
 const addScrum = catchAsync(async (req, res) => {
-  console.log(req.body)
-
   const addedData = await createScrum(
     req.body.scrumName,
     req.body.scrumMasterName,
